@@ -5,7 +5,7 @@ import theme from "./theme";
 const questions = [
   {
     question:
-      "If you wash your face and don?t apply any products, how does your skin behave 30 minutes after?",
+      "If you wash your face and don't apply any products, how does your skin behave 30 minutes after?",
     options: [
       "It feels dry",
       "It feels calm, smooth, and soft",
@@ -85,15 +85,28 @@ function Test() {
 
   // Display questions
   return (
-    <div>
-      <h2>{question}</h2>
-      <ul>
-        {options.map((option) => (
-          <li key={option}>
-            <button onClick={() => handleAnswer(option)}>{option}</button>
-          </li>
-        ))}
-      </ul>
+    <div className="flex rounded-lg bg-emerald-900 m-8 mx-20">
+      {/* progress */}
+      <div>Guidelines Test Result</div>
+
+      {/* question */}
+      <div className="flex-1 bg-white m-5 rounded-md">
+        <div className="px-80">
+          <h2 className="font-bold text-center py-4">{question}</h2>
+          <ul>
+            {options.map((option) => (
+              // wrap li in button
+              <button
+                className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                key={option}
+                onClick={() => handleAnswer(option)}
+              >
+                <li>{option}</li>
+              </button>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

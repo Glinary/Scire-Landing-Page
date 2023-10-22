@@ -16,10 +16,8 @@ code {
     monospace;
 }
 
-h1 {
-  @apply text-emerald-900;
-}
-
+h1,
+h2,
 p {
   @apply text-emerald-900;
 }
