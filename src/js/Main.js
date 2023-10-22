@@ -2,6 +2,9 @@ import { Button, ThemeProvider } from "@mui/material";
 import React, { useState } from "react";
 import theme from "./theme";
 
+// The main quiz section
+
+// list of all questions
 const questions = [
   {
     question:
@@ -45,34 +48,11 @@ const questions = [
 ];
 
 function Test() {
+  // Declaration of variables
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showTest, setShowTest] = useState(false);
   const [email, setEmail] = useState("");
   const [answers, setAnswers] = useState([]);
-
-  const handleAnswer = (index) => {
-    setAnswers([...answers, index]);
-    setCurrentQuestion(currentQuestion + 1);
-  };
-
-  const handleStartTest = () => {
-    setShowTest(true);
-  };
-
-  const processAnswers = (answers) => {
-    console.log(answers);
-  };
-
-  // When email form is submitted
-  const handleEmailSubmit = (event) => {
-    event.preventDefault();
-    console.log(email);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
 
   // Landing page shown before the test starts
   if (!showTest) {
@@ -85,11 +65,128 @@ function Test() {
     );
   }
 
+  // When the start test button is clicked
+  const handleStartTest = () => {
+    setShowTest(true);
+  };
+
+  // When a test option is clicked
+  const handleAnswer = (option) => {
+    const index = options.indexOf(option);
+    const letter = String.fromCharCode(index + 65);
+    setAnswers([...answers, letter]);
+    setCurrentQuestion(currentQuestion + 1);
+  };
+
+  // When email form is submitted
+  const handleEmailSubmit = (event) => {
+    event.preventDefault();
+    console.log(email);
+  };
+
+  // When email input is changed
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  // Process the answers and return the final result
+  const processAnswers = (answers) => {
+    // Get answers to each question
+    const q1 = answers[0]
+    const q2 = answers[1]
+    const q3 = answers[2]
+    const q4 = answers[3]
+    const q5 = answers[4]
+    let skin_type, acne_prone, sun_sensitive;
+  
+    if (q1 === "A") {
+      if (q2 === "C" || q2 === "D") {
+        skin_type = "Dry";
+      } else if (q2 === "G") {
+        skin_type = "Normal";
+      } else if (q2 === "A" || q2 === "B" || q2 === "E") {
+        skin_type = "Combination";
+      } else if (q2 === "F") {
+        skin_type = "Sensitive";
+      }
+    } else if (q1 === "B") {
+      if (q2 === "B") {
+        if (q3 === "A") {
+          skin_type = "Oily";
+        } else {
+          skin_type = "Normal";
+        }
+      } else if (q2 === "C" || q2 === "D") {
+        if (q3 === "B") {
+          skin_type = "Combination";
+        } else {
+          skin_type = "Dry";
+        }
+      } else if (q2 === "A" || q2 === "E") {
+        skin_type = "Combination";
+      } else if (q2 === "F") {
+        skin_type = "Sensitive";
+      }
+    } else if (q1 === "C") {
+      if (q2 === "F") {
+        skin_type = "Sensitive";
+      } else if (q2 === "B") {
+        if (q3 === "A" || q3 === "B") {
+          skin_type = "Oily";
+        } else if (q3 === "C" || q3 === "D") {
+          skin_type = "Combination";
+        }
+      } else {
+        skin_type = "Combination";
+      }
+    } else if (q1 === "D") {
+      if (q2 === "F") {
+        skin_type = "Sensitive";
+      } else if (q2 === "A" || q2 === "E") {
+        skin_type = "Combination";
+      } else if (q2 === "G") {
+        if (q3 === "A" || q3 === "B") {
+          skin_type = "Oily";
+        } else {
+          skin_type = "Combination";
+        }
+      } else {
+        skin_type = "Oily";
+      }
+    }
+
+    if (q4 === "A") {
+      acne_prone = "Acne Prone";
+    } else {
+      acne_prone = "Not Acne Prone";
+    }
+  
+    if (q5 === "A") {
+      sun_sensitive = "Sun Sensitive";
+    } else {
+      sun_sensitive = "Not Sun Sensitive";
+    }
+  
+    // Return results
+    return (
+      <div>
+        <p>
+          Thank you for answering the questions!<br/>
+          Here's your assessment:<br/>
+          Skin Type: {skin_type}<br/>
+          Acne Prone: {acne_prone}<br/>
+          Sun-Sensitive: {sun_sensitive}<br/>
+          If you have any more questions or need further assistance, feel free to ask!<br/>
+        </p>
+      </div>
+    );
+  };
+
   // When all questions have been asked
   if (currentQuestion >= questions.length) {
     return (
       <div>
-        <p>Results: {processAnswers(answers)}</p>
+        {processAnswers(answers)}
         <h2>Want to save your result? We'll gladly email you</h2>
         <form onSubmit={handleEmailSubmit}>
           <label>
@@ -105,15 +202,16 @@ function Test() {
   // Render the current question and options
   const { question, options } = questions[currentQuestion];
 
+  // Display the current question and options
   return (
     <div>
       <h2>{question}</h2>
       <ul>
-        {options.map((option, index) => (
-          <li key={option}>
-            <button onClick={() => handleAnswer(index)}>{option}</button>
-          </li>
-        ))}
+      {options.map((option) => (
+        <li key={option}>
+          <button onClick={() => handleAnswer(option)}>{option}</button>
+        </li>
+      ))}
       </ul>
     </div>
   );

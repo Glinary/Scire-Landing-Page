@@ -3,6 +3,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import { ThemeProvider } from "@mui/material";
 import theme from "./theme";
 
+// Header secton
+
 const Header = () => {
   return (
     /* Scire Essentials Logo */
