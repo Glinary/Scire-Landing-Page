@@ -4,16 +4,13 @@ function About() {
   console.log("About component rendered");
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold py-2">About the Test</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+    <div className="bg-[#DA9B2A] p-14">
+      <h1 className="text-3xl font-bold py-2 pb-7 text-center">About the Test</h1>
+      <p className="text-center px-10 pb-2">
+      Dolor nostrud proident elit mollit ex occaecat lorem ullamco et tempor amet laborum dolore non ullamco cillum id enim. Officia cupidatat
+      magna exercitation nisi pariatur magna quis ea mollit ex sed sint consequat laborum excepteur. Eiusmod labore esse et mollit mollit proident
+      deserunt ullamco deserunt aliquip ex fugiat veniam ullamco laborum. Cupidatat ad sed culpa consectetur laboris amet deserunt exercitation
+      eiusmod cillum sint dolore do sunt duis.
       </p>
     </div>
   );
