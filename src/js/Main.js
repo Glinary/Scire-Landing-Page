@@ -54,6 +54,12 @@ function Test() {
   const [email, setEmail] = useState("");
   const [answers, setAnswers] = useState([]);
 
+  // When the start test button is clicked
+  const handleStartTest = () => {
+    setShowTest(true);
+  };
+
+
   // Landing page shown before the test starts
   if (!showTest) {
     return (
@@ -64,11 +70,6 @@ function Test() {
       </div>
     );
   }
-
-  // When the start test button is clicked
-  const handleStartTest = () => {
-    setShowTest(true);
-  };
 
   // When a test option is clicked
   const handleAnswer = (option) => {
