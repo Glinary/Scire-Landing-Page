@@ -14,6 +14,7 @@ npm i express
 npm run dev
 ```
 edit package.json from `server` directory with `"proxy": "http://localhost:5000"`
+
 navigate to `client` directory
 ensure react is coded to app.js
 ```
