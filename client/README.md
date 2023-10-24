@@ -6,6 +6,22 @@ for newsletters that will be sent by the skincare business for marketing purpose
 # Installation
 Instructions will be updated once this project is finalized.
 
+navigate to `server` directory
+setup express code
+```
+npm init -y
+npm i express
+npm run dev
+```
+edit package.json from `server` directory with `"proxy": "http://localhost:5000"`
+navigate to `client` directory
+ensure react is coded to app.js
+```
+npm install
+npm start
+```
+
+
 # Dev Team
 This project was made by Gleezell Uy, Adrian Cheng, Alina Sayo, Angelo Guerra, Daniel Gutierrez, Erika Culala, Krizchelle Wong, and MJ Cabungcal.
 
