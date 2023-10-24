@@ -10,8 +10,8 @@ const Header = () => {
     /* Scire Essentials Logo */
 
     <div className="flex flex-col items-center pt-20 pb-7">
-      <h1 className="text-5xl font-bold py-2">SkinGenius</h1>
-      <p className="py-1.5">
+      <h1 className="text-5xl py-2" id="header">SkinGenius</h1>
+      <p className="py-1.5" id="header">
         The beginning of your skin care journey
       </p>
       <p className="text-center pt-5">
