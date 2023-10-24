@@ -21,3 +21,8 @@ h2,
 p {
   @apply text-emerald-900;
 }
+
+#header {
+  font-family: "League Spartan";
+  font-weight: normal;
+}
