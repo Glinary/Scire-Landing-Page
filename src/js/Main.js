@@ -53,6 +53,7 @@ function Test() {
   const [showTest, setShowTest] = useState(false);
   const [email, setEmail] = useState("");
   const [answers, setAnswers] = useState([]);
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   // When the start test button is clicked
   const handleStartTest = () => {
@@ -83,11 +84,18 @@ function Test() {
   const handleEmailSubmit = (event) => {
     event.preventDefault();
     console.log(email);
+    setEmailSubmitted(true);
   };
 
   // When email input is changed
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
+  };
+
+  // Goes back 1 question
+  const handleBack = () => {
+    setCurrentQuestion(currentQuestion - 1);
+    setAnswers(answers.slice(0, -1));
   };
 
   // Process the answers and return the final result
@@ -168,7 +176,8 @@ function Test() {
       sun_sensitive = "Not Sun Sensitive";
     }
   
-    // Return results
+    // Return results if email has been submitted
+
     return (
       <div>
         <p>
@@ -181,23 +190,31 @@ function Test() {
         </p>
       </div>
     );
+
   };
 
   // When all questions have been asked
   if (currentQuestion >= questions.length) {
-    return (
-      <div>
-        {processAnswers(answers)}
-        <h2>Want to save your result? We'll gladly email you</h2>
-        <form onSubmit={handleEmailSubmit}>
-          <label>
-            Email:
-            <input type="email" value={email} onChange={handleEmailChange} />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    );
+    if (!emailSubmitted) {
+      return (
+        <div>
+          <h2>Enter your email to save your result</h2>
+          <form onSubmit={handleEmailSubmit}>
+            <label>
+              Email:
+              <input type="email" value={email} onChange={handleEmailChange} />
+            </label>
+            <button type="submit" disabled={email.trim() === ""}>Submit</button>
+          </form>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {processAnswers(answers)}
+        </div>
+      );
+    }
   }
 
   // Render the current question and options
@@ -208,12 +225,15 @@ function Test() {
     <div>
       <h2>{question}</h2>
       <ul>
-      {options.map((option) => (
-        <li key={option}>
-          <button onClick={() => handleAnswer(option)}>{option}</button>
-        </li>
-      ))}
+        {options.map((option) => (
+          <li key={option}>
+            <button onClick={() => handleAnswer(option)}>{option}</button>
+          </li>
+        ))}
       </ul>
+      {currentQuestion > 0 && (
+        <button onClick={handleBack}>Back</button>
+      )}
     </div>
   );
 }
