@@ -10,9 +10,12 @@ const Header = () => {
     /* Scire Essentials Logo */
 
     <div className="flex flex-col items-center pt-20 pb-7">
-      <h1 className="text-5xl font-bold py-2 ">SKIN TEST</h1>
-      <p className="text-center">
-        Scire Technology presents you a test to check your skin type and become{" "}
+      <h1 className="text-5xl font-bold py-2">SkinGenius</h1>
+      <p className="py-1.5">
+        The beginning of your skin care journey
+      </p>
+      <p className="text-center pt-5">
+        Scire Essentials presents you a test to check your skin type and become{" "}
         <br />
         aware which products and routine suits your skin better.
       </p>
