@@ -1,6 +1,7 @@
 import { Button, ThemeProvider } from "@mui/material";
 import React, { useState } from "react";
 import theme from "./theme";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 // The main quiz section
 
@@ -239,7 +240,7 @@ function Test() {
 
       {/* question */}
       <div className="flex-1 bg-white m-5 rounded-md">
-        <div className="px-80">
+        <div className="flex flex-col justify-center px-80">
           <h2 className="font-bold text-center py-4">{question}</h2>
           <ul>
             {options.map((option) => (
@@ -253,6 +254,19 @@ function Test() {
               </button>
             ))}
           </ul>
+
+          {currentQuestion > 0 && (
+            <ThemeProvider theme={theme}>
+              <Button
+                variant="text"
+                className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
+                onClick={handleBack}
+                startIcon={<ArrowBackIcon />}
+              >
+                Back
+              </Button>
+            </ThemeProvider>
+          )}
         </div>
       </div>
     </div>
