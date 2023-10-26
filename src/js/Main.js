@@ -42,7 +42,8 @@ const questions = [
     options: ["Frequent", "Seldom"],
   },
   {
-    question: "Have you ever had a sunburn or noticed pigmentation changes after sun exposure?",
+    question:
+      "Have you ever had a sunburn or noticed pigmentation changes after sun exposure?",
     options: ["Yes", "No"],
   },
 ];
@@ -60,13 +61,19 @@ function Test() {
     setShowTest(true);
   };
 
-
   // Landing page shown before the test starts
   if (!showTest) {
     return (
-      <div className="flex flex-row justify-center mb-24">
+      <div className="flex flex-row justify-center">
         <ThemeProvider theme={theme}>
-          <button onClick={handleStartTest}>Start Test</button>
+          <Button
+            variant="outlined"
+            color="primary"
+            className="text-emerald-900"
+            onClick={handleStartTest}
+          >
+            Start Test
+          </Button>
         </ThemeProvider>
       </div>
     );
@@ -101,13 +108,13 @@ function Test() {
   // Process the answers and return the final result
   const processAnswers = (answers) => {
     // Get answers to each question
-    const q1 = answers[0]
-    const q2 = answers[1]
-    const q3 = answers[2]
-    const q4 = answers[3]
-    const q5 = answers[4]
+    const q1 = answers[0];
+    const q2 = answers[1];
+    const q3 = answers[2];
+    const q4 = answers[3];
+    const q5 = answers[4];
     let skin_type, acne_prone, sun_sensitive;
-  
+
     if (q1 === "A") {
       if (q2 === "C" || q2 === "D") {
         skin_type = "Dry";
@@ -169,28 +176,34 @@ function Test() {
     } else {
       acne_prone = "Not Acne Prone";
     }
-  
+
     if (q5 === "A") {
       sun_sensitive = "Sun Sensitive";
     } else {
       sun_sensitive = "Not Sun Sensitive";
     }
-  
+
     // Return results if email has been submitted
 
     return (
       <div>
         <p>
-          Thank you for answering the questions!<br/>
-          Here's your assessment:<br/>
-          Skin Type: {skin_type}<br/>
-          Acne Prone: {acne_prone}<br/>
-          Sun-Sensitive: {sun_sensitive}<br/>
-          If you have any more questions or need further assistance, feel free to ask!<br/>
+          Thank you for answering the questions!
+          <br />
+          Here's your assessment:
+          <br />
+          Skin Type: {skin_type}
+          <br />
+          Acne Prone: {acne_prone}
+          <br />
+          Sun-Sensitive: {sun_sensitive}
+          <br />
+          If you have any more questions or need further assistance, feel free
+          to ask!
+          <br />
         </p>
       </div>
     );
-
   };
 
   // When all questions have been asked
@@ -204,16 +217,14 @@ function Test() {
               Email:
               <input type="email" value={email} onChange={handleEmailChange} />
             </label>
-            <button type="submit" disabled={email.trim() === ""}>Submit</button>
+            <button type="submit" disabled={email.trim() === ""}>
+              Submit
+            </button>
           </form>
         </div>
       );
     } else {
-      return (
-        <div>
-          {processAnswers(answers)}
-        </div>
-      );
+      return <div>{processAnswers(answers)}</div>;
     }
   }
 
@@ -222,18 +233,28 @@ function Test() {
 
   // Display the current question and options
   return (
-    <div>
-      <h2>{question}</h2>
-      <ul>
-        {options.map((option) => (
-          <li key={option}>
-            <button onClick={() => handleAnswer(option)}>{option}</button>
-          </li>
-        ))}
-      </ul>
-      {currentQuestion > 0 && (
-        <button onClick={handleBack}>Back</button>
-      )}
+    <div className="flex rounded-lg bg-emerald-900 m-8 mx-20">
+      {/* progress */}
+      <div>Guidelines Test Result</div>
+
+      {/* question */}
+      <div className="flex-1 bg-white m-5 rounded-md">
+        <div className="px-80">
+          <h2 className="font-bold text-center py-4">{question}</h2>
+          <ul>
+            {options.map((option) => (
+              // wrap li in button
+              <button
+                className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                key={option}
+                onClick={() => handleAnswer(option)}
+              >
+                <li>{option}</li>
+              </button>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
