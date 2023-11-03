@@ -11,7 +11,7 @@ import "@fontsource/roboto/700.css";
 // Set-up of the entire page 
 function App() {
   return (
-    <div>
+    <div className="bg-[#FDFAF3]">
       <Header />
       <Main />
 
