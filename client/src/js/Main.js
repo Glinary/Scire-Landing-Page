@@ -79,6 +79,22 @@ function storeResponse() {
   })
 }
 
+function storeEmail(email) {
+  console.log("I am at storeEmail()")
+  let userData = {
+    email:email
+  }
+  fetch("/api/storeEmail", {
+    method: 'post',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body:JSON.stringify(userData)
+  }).then(response=>response.json()).then(data=>{
+    console.log(data)
+  })
+}
+
 function Test() {
   // Declaration of variables
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -119,6 +135,7 @@ function Test() {
   // When email form is submitted
   const handleEmailSubmit = (event) => {
     event.preventDefault();
+    storeEmail(email)
     console.log(email);
     setEmailSubmitted(true);
   };

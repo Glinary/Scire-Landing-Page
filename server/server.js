@@ -26,17 +26,19 @@ const app = express()
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = DB_URI
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
+
 
 // Connect to MongoClient
 async function run() {
+    // Create a MongoClient with a MongoClientOptions object to set the Stable API version
+    const client = new MongoClient(uri, {
+      serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+      }
+    });
+
     try {
       // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
@@ -47,6 +49,37 @@ async function run() {
       // Ensures that the client will close when you finish/error
       await client.close();
     }
+}
+
+// Connect to MongoClient and save email to database
+async function storeEmail(email) {
+  // Create a MongoClient with a MongoClientOptions object to set the Stable API version
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
+
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    let db = client.db('landing_page');
+    let emails = db.collection('emails');
+    let temp = await emails.findOne({'email': email})
+    if (temp) {
+      console.log("email already exists")
+    } else {
+      await emails.insertOne({'email': email})
+    }
+    // Send a ping to confirm a successful connection
+    //await client.db("admin").command({ ping: 1 });
+    console.log("Successfully saved data to MongoDB");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
 }
 app.use(cookieParser());
 
@@ -79,6 +112,15 @@ app.post('/api/next', (req, res)=> {
   console.log("sessionId: " + sessionId)
   res.json({"message":"connectToDatabase()"})
   run().catch(console.dir);
+})
+
+app.post('/api/storeEmail', (req, res)=> {
+  let {email} = req.body
+  console.log("Real sessionId: " + req.sessionID)
+  console.log("email: " + email)
+  res.json({"message":"storeEmail()"})
+  storeEmail(email).catch(console.dir);
+
 })
 
 app.listen(5000, ()=> console.log("Server started at port 5000"))
