@@ -47,6 +47,38 @@ const questions = [
   },
 ];
 
+function connectToDatabase() {
+  console.log("I am at connectToDatabase()")
+  let userData = {
+    sessionId:"sampleSessionId"
+  }
+  fetch("/api/start", {
+    method: 'post',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body:JSON.stringify(userData)
+  }).then(response=>response.json()).then(data=>{
+    console.log(data)
+  })
+}
+
+function storeResponse() {
+  console.log("I am at storeResponse()")
+  let userData = {
+    sessionId:"sampleSessionId"
+  }
+  fetch("/api/next", {
+    method: 'post',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body:JSON.stringify(userData)
+  }).then(response=>response.json()).then(data=>{
+    console.log(data)
+  })
+}
+
 function Test() {
   // Declaration of variables
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -57,6 +89,8 @@ function Test() {
 
   // When the start test button is clicked
   const handleStartTest = () => {
+    console.log("I am at handleStartTest()")
+    connectToDatabase();
     setShowTest(true);
   };
 
@@ -74,6 +108,8 @@ function Test() {
 
   // When a test option is clicked
   const handleAnswer = (option) => {
+    console.log("I am at handleAnswer")
+    storeResponse();
     const index = options.indexOf(option);
     const letter = String.fromCharCode(index + 65);
     setAnswers([...answers, letter]);
