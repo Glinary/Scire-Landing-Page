@@ -41,7 +41,7 @@ async function run() {
       // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
       // Send a ping to confirm a successful connection
-      await client.db("admin").command({ ping: 1 });
+      //await client.db("admin").command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
       // Ensures that the client will close when you finish/error
@@ -53,9 +53,9 @@ app.use(cookieParser());
 // Use the express-session with proper settings (cookie was set to expire to 24 hours)
 app.use(session({
     secret: "some secret",
-    cookie: {maxAge: 24 * 60 * 60 * 1000},
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {maxAge: 24 * 60 * 60 * 1000}
 }));
 
 // Use the bodyParser
