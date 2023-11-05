@@ -101,6 +101,7 @@ function Test() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showTest, setShowTest] = useState(false);
   const [email, setEmail] = useState("");
+  const [answers, setAnswers] = useState([]);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   // When the start test button is clicked
@@ -127,14 +128,16 @@ function Test() {
     console.log("I am at handleAnswer")
     const index = options.indexOf(option);
     const letter = String.fromCharCode(index + 65);
+    setAnswers([...answers, letter]);
     storeResponse(currentQuestion, letter);
     setCurrentQuestion(currentQuestion + 1);
   };
 
   // When email form is submitted
   const handleEmailSubmit = (event) => {
+    console.log("I am  at handleEmailSubmit");
     event.preventDefault();
-    storeEmail(email)
+    storeEmail(email);
     console.log(email);
     setEmailSubmitted(true);
   };
@@ -147,6 +150,7 @@ function Test() {
   // Goes back 1 question
   const handleBack = () => {
     setCurrentQuestion(currentQuestion - 1);
+    setAnswers(answers.slice(0, -1));
   };
 
   // Process a get request to /api/getResults and return the JSON result
@@ -160,7 +164,7 @@ function Test() {
   }
 
   // Process the answers and return the final result
-  const processAnswers = () => {
+  const processAnswers = (answers) => {
 
     let skin_type, acne_prone, sun_sensitive;
     
@@ -279,7 +283,7 @@ function Test() {
     } else {
       return (
         <div>
-          {processAnswers()}
+          {processAnswers(answers)}
         </div>
       );
     }
