@@ -128,7 +128,9 @@ app.post('/api/storeResponse', (req, res)=> {
   console.log("Real sessionId: " + req.sessionID)
 })
 
+//TODO: post /api/storeEmail will not read in the future if user presses back at least once
 app.post('/api/storeEmail', (req, res)=> {
+  console.log("I am at the store Email post request");
   let {email} = req.body
   console.log("Real sessionId: " + req.sessionID)
   console.log("email: " + email)
