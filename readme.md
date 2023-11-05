@@ -11,9 +11,9 @@ navigate to `server` directory
 "npm init -y"
 "npm i express"
 "npm i dotenv"
-"npm install mongodb"
 "npm i express-session"
 "npm i cookie-parser"
+"npm install googleapis@95.0.0"
 "npm run dev"
 ```
 edit package.json from `server` directory with `"proxy": "http://localhost:5000"`
@@ -31,8 +31,6 @@ This project was made by Gleezell Uy, Adrian Cheng, Alina Sayo, Angelo Guerra, D
 [comment]: <this was taken from: https://home.aveek.io/GitHub-Profile-Badges/>
 [comment]: <this was taken from: https://kapasia-dev-ed.my.site.com/Badges4Me/s/>
 # Technologies
-![Python](https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248.svg?style=for-the-badge&logo=MongoDB&logoColor=white)
 ![React](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black)
 ![Express](https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=Express&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/Node.js-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)
