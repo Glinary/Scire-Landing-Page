@@ -98,6 +98,26 @@ app.get('/api', (req, res)=> {
     res.send("From server")
 })
 
+app.get('/api/getResults', (req, res)=> {
+  let option0 = req.session.option0;
+  let option1 = req.session.option1;
+  let option2 = req.session.option2;
+  let option3 = req.session.option3;
+  let option4 = req.session.option4;
+
+  const responseData = {
+    option0,
+    option1,
+    option2,
+    option3,
+    option4
+  };
+
+  //TODO: fix this part. It is getting called twice from getAnswers() from Main.js
+  console.log("I am at get /api/getResults");
+  res.json(responseData);
+})
+
 app.post('/api/start', (req, res)=> {
     let {sessionId} = req.body
     console.log("Real sessionId: " + req.sessionID)
@@ -106,10 +126,31 @@ app.post('/api/start', (req, res)=> {
     run().catch(console.dir);
 })
 
-app.post('/api/next', (req, res)=> {
-  let {sessionId} = req.body
+app.post('/api/storeResponse', (req, res)=> {
+  let {currentQuestion, letter} = req.body
+  switch (currentQuestion) {
+    case 0:
+      req.session.option0 = letter;
+      console.log("I stored " + req.session.option0 + " to option0");
+      break;
+    case 1:
+      req.session.option1 = letter;
+      console.log("I stored " + req.session.option1 + " to option1");
+      break;
+    case 2:
+      req.session.option2 = letter;
+      console.log("I stored " + req.session.option2 + " to option2");
+      break;
+    case 3:
+      req.session.option3 = letter;
+      console.log("I stored " + req.session.option3 + " to option3");
+      break;
+    case 4:
+      req.session.option4 = letter;
+      console.log("I stored " + req.session.option4 + " to option4");
+      break;
+  }
   console.log("Real sessionId: " + req.sessionID)
-  console.log("sessionId: " + sessionId)
   res.json({"message":"connectToDatabase()"})
   run().catch(console.dir);
 })

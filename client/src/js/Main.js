@@ -63,12 +63,13 @@ function connectToDatabase() {
   })
 }
 
-function storeResponse() {
+function storeResponse(currentQuestion, letter) {
   console.log("I am at storeResponse()")
   let userData = {
-    sessionId:"sampleSessionId"
+    currentQuestion: currentQuestion,
+    letter: letter
   }
-  fetch("/api/next", {
+  fetch("/api/storeResponse", {
     method: 'post',
     headers: {
       "Content-Type": "application/json"
@@ -100,7 +101,6 @@ function Test() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showTest, setShowTest] = useState(false);
   const [email, setEmail] = useState("");
-  const [answers, setAnswers] = useState([]);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   // When the start test button is clicked
@@ -125,10 +125,9 @@ function Test() {
   // When a test option is clicked
   const handleAnswer = (option) => {
     console.log("I am at handleAnswer")
-    storeResponse();
     const index = options.indexOf(option);
     const letter = String.fromCharCode(index + 65);
-    setAnswers([...answers, letter]);
+    storeResponse(currentQuestion, letter);
     setCurrentQuestion(currentQuestion + 1);
   };
 
@@ -148,89 +147,105 @@ function Test() {
   // Goes back 1 question
   const handleBack = () => {
     setCurrentQuestion(currentQuestion - 1);
-    setAnswers(answers.slice(0, -1));
   };
 
+  // Process a get request to /api/getResults and return the JSON result
+  function getAnswers() {
+    return fetch("/api/getResults", {
+      method: 'get',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(response=>response.json());
+  }
+
   // Process the answers and return the final result
-  const processAnswers = (answers) => {
-    // Get answers to each question
-    const q1 = answers[0]
-    const q2 = answers[1]
-    const q3 = answers[2]
-    const q4 = answers[3]
-    const q5 = answers[4]
+  const processAnswers = () => {
+
     let skin_type, acne_prone, sun_sensitive;
-  
-    if (q1 === "A") {
-      if (q2 === "C" || q2 === "D") {
-        skin_type = "Dry";
-      } else if (q2 === "G") {
-        skin_type = "Normal";
-      } else if (q2 === "A" || q2 === "B" || q2 === "E") {
-        skin_type = "Combination";
-      } else if (q2 === "F") {
-        skin_type = "Sensitive";
-      }
-    } else if (q1 === "B") {
-      if (q2 === "B") {
-        if (q3 === "A") {
-          skin_type = "Oily";
-        } else {
-          skin_type = "Normal";
-        }
-      } else if (q2 === "C" || q2 === "D") {
-        if (q3 === "B") {
-          skin_type = "Combination";
-        } else {
+    
+    getAnswers().then(data=> {
+
+      // Get answers to each question
+      const q1 = data.option0;
+      const q2 = data.option1;
+      const q3 = data.option2;
+      const q4 = data.option3;
+      const q5 = data.option4;
+
+      if (q1 === "A") {
+        if (q2 === "C" || q2 === "D") {
           skin_type = "Dry";
-        }
-      } else if (q2 === "A" || q2 === "E") {
-        skin_type = "Combination";
-      } else if (q2 === "F") {
-        skin_type = "Sensitive";
-      }
-    } else if (q1 === "C") {
-      if (q2 === "F") {
-        skin_type = "Sensitive";
-      } else if (q2 === "B") {
-        if (q3 === "A" || q3 === "B") {
-          skin_type = "Oily";
-        } else if (q3 === "C" || q3 === "D") {
+        } else if (q2 === "G") {
+          skin_type = "Normal";
+        } else if (q2 === "A" || q2 === "B" || q2 === "E") {
           skin_type = "Combination";
+        } else if (q2 === "F") {
+          skin_type = "Sensitive";
         }
-      } else {
-        skin_type = "Combination";
-      }
-    } else if (q1 === "D") {
-      if (q2 === "F") {
-        skin_type = "Sensitive";
-      } else if (q2 === "A" || q2 === "E") {
-        skin_type = "Combination";
-      } else if (q2 === "G") {
-        if (q3 === "A" || q3 === "B") {
-          skin_type = "Oily";
+      } else if (q1 === "B") {
+        if (q2 === "B") {
+          if (q3 === "A") {
+            skin_type = "Oily";
+          } else {
+            skin_type = "Normal";
+          }
+        } else if (q2 === "C" || q2 === "D") {
+          if (q3 === "B") {
+            skin_type = "Combination";
+          } else {
+            skin_type = "Dry";
+          }
+        } else if (q2 === "A" || q2 === "E") {
+          skin_type = "Combination";
+        } else if (q2 === "F") {
+          skin_type = "Sensitive";
+        }
+      } else if (q1 === "C") {
+        if (q2 === "F") {
+          skin_type = "Sensitive";
+        } else if (q2 === "B") {
+          if (q3 === "A" || q3 === "B") {
+            skin_type = "Oily";
+          } else if (q3 === "C" || q3 === "D") {
+            skin_type = "Combination";
+          }
         } else {
           skin_type = "Combination";
         }
-      } else {
-        skin_type = "Oily";
+      } else if (q1 === "D") {
+        if (q2 === "F") {
+          skin_type = "Sensitive";
+        } else if (q2 === "A" || q2 === "E") {
+          skin_type = "Combination";
+        } else if (q2 === "G") {
+          if (q3 === "A" || q3 === "B") {
+            skin_type = "Oily";
+          } else {
+            skin_type = "Combination";
+          }
+        } else {
+          skin_type = "Oily";
+        }
       }
-    }
+  
+      if (q4 === "A") {
+        acne_prone = "Acne Prone";
+      } else {
+        acne_prone = "Not Acne Prone";
+      }
+    
+      if (q5 === "A") {
+        sun_sensitive = "Sun Sensitive";
+      } else {
+        sun_sensitive = "Not Sun Sensitive";
+      }
 
-    if (q4 === "A") {
-      acne_prone = "Acne Prone";
-    } else {
-      acne_prone = "Not Acne Prone";
-    }
-  
-    if (q5 === "A") {
-      sun_sensitive = "Sun Sensitive";
-    } else {
-      sun_sensitive = "Not Sun Sensitive";
-    }
-  
+    }).catch(error => {
+      console.error("An error occurred:", error);
+    })
+    
     // Return results if email has been submitted
-
     return (
       <div>
         <p>
@@ -264,7 +279,7 @@ function Test() {
     } else {
       return (
         <div>
-          {processAnswers(answers)}
+          {processAnswers()}
         </div>
       );
     }
