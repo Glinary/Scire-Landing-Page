@@ -17,7 +17,6 @@ navigate to `server` directory
 "npm install nodemailer"
 "npm run dev"
 ```
-edit package.json from `server` directory with `"proxy": "http://localhost:5000"`
 
 navigate to `client` directory
 ```

@@ -63,12 +63,6 @@ async function storeEmail(email) {
   writeGoogleSheet(client, sheetId, tabName, range, data);
 }
 
-async function storeEmail(email) {
-  let client = await getGoogleSheetClient();
-  let data = [[email]];
-  await writeGoogleSheet(client, sheetId, tabName, range, data);
-}
-
 async function sendToEmail(email, skin_type, acne_prone, sun_sensitive) {
   var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -107,7 +101,7 @@ app.use(cookieParser());
 // Use the express-session with proper settings (cookie was set to expire to 24 hours)
 app.use(session({
     secret: "some secret",
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     cookie: {maxAge: 24 * 60 * 60 * 1000}
 }));
@@ -115,18 +109,18 @@ app.use(session({
 // Use the bodyParser
 app.use(bodyParser.json())
 
+// template test to see if the back-end works via a get request
 app.get('/api', (req, res)=> {
     res.send("From server")
 })
 
-app.get('/api/getResults', (req, res)=> {
+// get the answers of the user from each question
+app.get('/api/getAnswers', (req, res)=> {
   let option0 = req.session.option0;
   let option1 = req.session.option1;
   let option2 = req.session.option2;
   let option3 = req.session.option3;
   let option4 = req.session.option4;
-
-  console.log("PLS READ", req.session.option0);
 
   const responseData = {
     option0,
@@ -137,10 +131,11 @@ app.get('/api/getResults', (req, res)=> {
   };
 
   //TODO: fix this part. It is getting called twice from getAnswers() from Main.js
-  console.log("I am at get /api/getResults");
+  console.log("I am at get /api/getAnswers");
   res.json(responseData);
 })
 
+// get the test results of the user after the quiz
 app.get('/api/getTestResults', (req, res)=> {
   let skin_type = req.session.skin_type;
   let acne_prone = req.session.acne_prone;
@@ -156,11 +151,15 @@ app.get('/api/getTestResults', (req, res)=> {
   res.json(responseData);
 })
 
+// test the first post request upon starting the quiz
 app.post('/api/start', (req, res)=> {
-    console.log("sessionId: " + req.sessionID)
-    res.json({"message":"Session successfully connected"})
+  let {sessionId} = req.body;
+
+  console.log("sessionId: " + req.sessionID)
+  res.json({"message":"Session successfully connected"})
 })
 
+// stores the response of the user in each question
 app.post('/api/storeResponse', (req, res)=> {
   let {currentQuestion, letter} = req.body
   
@@ -186,19 +185,23 @@ app.post('/api/storeResponse', (req, res)=> {
       console.log("I stored " + req.session.option4 + " to option4");
       break;
   }
+  req.session.save();
   console.log("Real sessionId: " + req.sessionID)
 })
 
+// store the test results of the user upon finishing the quiz
 app.post('/api/storeResults', (req, res)=> {
   let {skin_type, acne_prone, sun_sensitive} = req.body
   
   req.session.skin_type = skin_type;
   req.session.acne_prone = acne_prone;
   req.session.sun_sensitive = sun_sensitive;
+  req.session.save();
 
   console.log("Results stored successfully to session:", req.sessionID);
 })
 
+// stores the email of the user in the google sheets
 //TODO: post /api/storeEmail will not read in the future if user presses back at least once
 app.post('/api/storeEmail', (req, res)=> {
   console.log("I am at the store Email post request");
@@ -209,6 +212,7 @@ app.post('/api/storeEmail', (req, res)=> {
   storeEmail(email).catch(console.dir);
 })
 
+// sends the results to the email of the user
 app.post('/api/sendEmail', (req, res)=> {
   let {email, skin_type, acne_prone, sun_sensitive} = req.body;
 
@@ -217,4 +221,4 @@ app.post('/api/sendEmail', (req, res)=> {
   console.log("Email sent");
 })
 
-app.listen(5000, ()=> console.log("Server started at port 5000"))
+app.listen(6000, ()=> console.log("Server started at port 6000"))

@@ -104,25 +104,44 @@ function storeEmail(email) {
     });
 }
 
-function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
-  console.log("I am at sendEmail()");
-  let userData = {
-    email: email,
-    skin_type,
-    acne_prone,
-    sun_sensitive
+// store the results and send the email
+function storeResults(email, skin_type, acne_prone, sun_sensitive) {
+  console.log("I am at storeResults()");
+  sendEmail(email, skin_type, acne_prone, sun_sensitive);
+  let userResults = {
+    skin_type: skin_type,
+    acne_prone: acne_prone,
+    sun_sensitive: sun_sensitive
   };
-  fetch("/api/sendEmail", {
-    method: "post",
+  fetch("/api/storeResults", {
+    method: 'post',
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(userData),
+    body: JSON.stringify(userResults),
+  }).then((response)=> response.json()).then((data)=>{
+    console.log(data)
   })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+
+}
+
+function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
+  console.log("I am at sendEmail()");
+  let userResults = {
+    email: email,
+    skin_type: skin_type,
+    acne_prone: acne_prone,
+    sun_sensitive: sun_sensitive
+  };
+  fetch("/api/sendEmail", {
+    method: 'post',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userResults),
+  }).then((response)=> response.json()).then((data)=>{
+    console.log(data)
+  })
 }
 
 function Test() {
@@ -193,7 +212,7 @@ function Test() {
 
   // Process a get request to /api/getResults and return the JSON result
   function getAnswers() {
-    return fetch("/api/getResults", {
+    return fetch("/api/getAnswers", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -208,22 +227,15 @@ function Test() {
     getAnswers()
       .then((data) => {
         // Get answers to each question
-        const q1 = answers[0]
-        const q2 = answers[1]
-        const q3 = answers[2]
-        const q4 = answers[3]
-        const q5 = answers[4]
-
-        console.log("I GOTTTT q1", q1);
-        console.log("I GOTTTT q2", q2);
-        console.log("I GOTTTT q3", q3);
-        console.log("I GOTTTT q4", q4);
-        console.log("I GOTTTT q5", q5);
+        const q1 = data.option0;
+        const q2 = data.option1;
+        const q3 = data.option2;
+        const q4 = data.option3;
+        const q5 = data.option4;
 
         if (q1 === "A") {
           if (q2 === "C" || q2 === "D") {
             skin_type = "Dry";
-            console.log("SKIN TYPE ISSSS:", skin_type);
           } else if (q2 === "G") {
             skin_type = "Normal";
           } else if (q2 === "A" || q2 === "B" || q2 === "E") {
@@ -289,13 +301,13 @@ function Test() {
           sun_sensitive = "Not Sun Sensitive";
         }
 
+        storeResults(email, skin_type, acne_prone, sun_sensitive);
+        
         setSkinType(skin_type);
         setAcneProne(acne_prone);
         setSunSensitive(sun_sensitive);
 
         console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
-        sendEmail(email, skin_type, acne_prone, sun_sensitive);
-
       })
       .catch((error) => {
         console.error("An error occurred:", error);
