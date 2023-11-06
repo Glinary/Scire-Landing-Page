@@ -208,15 +208,22 @@ function Test() {
     getAnswers()
       .then((data) => {
         // Get answers to each question
-        const q1 = data.option0;
-        const q2 = data.option1;
-        const q3 = data.option2;
-        const q4 = data.option3;
-        const q5 = data.option4;
+        const q1 = answers[0]
+        const q2 = answers[1]
+        const q3 = answers[2]
+        const q4 = answers[3]
+        const q5 = answers[4]
+
+        console.log("I GOTTTT q1", q1);
+        console.log("I GOTTTT q2", q2);
+        console.log("I GOTTTT q3", q3);
+        console.log("I GOTTTT q4", q4);
+        console.log("I GOTTTT q5", q5);
 
         if (q1 === "A") {
           if (q2 === "C" || q2 === "D") {
             skin_type = "Dry";
+            console.log("SKIN TYPE ISSSS:", skin_type);
           } else if (q2 === "G") {
             skin_type = "Normal";
           } else if (q2 === "A" || q2 === "B" || q2 === "E") {

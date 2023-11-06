@@ -126,6 +126,8 @@ app.get('/api/getResults', (req, res)=> {
   let option3 = req.session.option3;
   let option4 = req.session.option4;
 
+  console.log("PLS READ", req.session.option0);
+
   const responseData = {
     option0,
     option1,
@@ -161,6 +163,7 @@ app.post('/api/start', (req, res)=> {
 
 app.post('/api/storeResponse', (req, res)=> {
   let {currentQuestion, letter} = req.body
+  
   switch (currentQuestion) {
     case 0:
       req.session.option0 = letter;
