@@ -104,6 +104,27 @@ function storeEmail(email) {
     });
 }
 
+function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
+  console.log("I am at sendEmail()");
+  let userData = {
+    email: email,
+    skin_type,
+    acne_prone,
+    sun_sensitive
+  };
+  fetch("/api/sendEmail", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
+}
+
 function Test() {
   // Declaration of variables
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -111,6 +132,9 @@ function Test() {
   const [email, setEmail] = useState("");
   const [answers, setAnswers] = useState([]);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [skinType, setSkinType] = useState(null);
+  const [acneProne, setAcneProne] = useState(null);
+  const [sunSensitive, setSunSensitive] = useState(null);
 
   // When the start test button is clicked
   const handleStartTest = () => {
@@ -257,6 +281,14 @@ function Test() {
         } else {
           sun_sensitive = "Not Sun Sensitive";
         }
+
+        setSkinType(skin_type);
+        setAcneProne(acne_prone);
+        setSunSensitive(sun_sensitive);
+
+        console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
+        sendEmail(email, skin_type, acne_prone, sun_sensitive);
+
       })
       .catch((error) => {
         console.error("An error occurred:", error);
@@ -270,11 +302,11 @@ function Test() {
           <br />
           Here's your assessment:
           <br />
-          Skin Type: {skin_type}
+          Skin Type: {skinType}
           <br />
-          Acne Prone: {acne_prone}
+          Acne Prone: {acneProne}
           <br />
-          Sun-Sensitive: {sun_sensitive}
+          Sun-Sensitive: {sunSensitive}
           <br />
           If you have any more questions or need further assistance, feel free
           to ask!

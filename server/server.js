@@ -6,6 +6,7 @@ Dependencies under server directory:
 "npm i express-session"
 "npm i cookie-parser"
 "npm install googleapis@95.0.0"
+"npm install nodemailer"
 "npm run dev"
 
 Dependencies under client directory:
@@ -22,11 +23,14 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const { google } = require('googleapis');
+const nodemailer = require('nodemailer');
 const app = express()
 const serviceAccountKeyFile = "./dazzling-pier-398716-de8cf8bc5f4c.json";
 const sheetId = process.env.SHEET_ID;
 const tabName = process.env.TAB_NAME;
 const range = process.env.RANGE;
+const APP_PASSWORD = process.env.APP_PASSWORD;
+const APP_EMAIL = process.env.APP_EMAIL;
 
 async function getGoogleSheetClient() {
   const auth = new google.auth.GoogleAuth({
@@ -57,6 +61,45 @@ async function storeEmail(email) {
   let client = await getGoogleSheetClient();
   let data = [[email]];
   writeGoogleSheet(client, sheetId, tabName, range, data);
+}
+
+async function storeEmail(email) {
+  let client = await getGoogleSheetClient();
+  let data = [[email]];
+  await writeGoogleSheet(client, sheetId, tabName, range, data);
+}
+
+async function sendToEmail(email, skin_type, acne_prone, sun_sensitive) {
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: APP_EMAIL,
+      pass: APP_PASSWORD
+    }
+  });
+
+  // Create a template for the email text
+  var emailText = `
+    Your results:
+    Skin Type: ${skin_type}
+    Acne Prone: ${acne_prone}
+    Sun Sensitive: ${sun_sensitive}
+  `;
+
+  var mailOptions = {
+    from: APP_EMAIL,
+    to: email, 
+    subject: 'ScireEssentials: Test Results',
+    text: emailText
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
 }
 
 app.use(cookieParser());
@@ -96,6 +139,21 @@ app.get('/api/getResults', (req, res)=> {
   res.json(responseData);
 })
 
+app.get('/api/getTestResults', (req, res)=> {
+  let skin_type = req.session.skin_type;
+  let acne_prone = req.session.acne_prone;
+  let sun_sensitive = req.session.sun_sensitive;
+
+  const responseData = {
+    skin_type,
+    acne_prone,
+    sun_sensitive
+  };
+
+  console.log("I am at get /api/getTestResults");
+  res.json(responseData);
+})
+
 app.post('/api/start', (req, res)=> {
     console.log("sessionId: " + req.sessionID)
     res.json({"message":"Session successfully connected"})
@@ -128,6 +186,16 @@ app.post('/api/storeResponse', (req, res)=> {
   console.log("Real sessionId: " + req.sessionID)
 })
 
+app.post('/api/storeResults', (req, res)=> {
+  let {skin_type, acne_prone, sun_sensitive} = req.body
+  
+  req.session.skin_type = skin_type;
+  req.session.acne_prone = acne_prone;
+  req.session.sun_sensitive = sun_sensitive;
+
+  console.log("Results stored successfully to session:", req.sessionID);
+})
+
 //TODO: post /api/storeEmail will not read in the future if user presses back at least once
 app.post('/api/storeEmail', (req, res)=> {
   console.log("I am at the store Email post request");
@@ -136,6 +204,14 @@ app.post('/api/storeEmail', (req, res)=> {
   console.log("email: " + email)
   res.json({"message":"storeEmail()"})
   storeEmail(email).catch(console.dir);
+})
+
+app.post('/api/sendEmail', (req, res)=> {
+  let {email, skin_type, acne_prone, sun_sensitive} = req.body;
+
+  console.log("/api/sendEmail got", skin_type, acne_prone, sun_sensitive);
+  sendToEmail(email, skin_type, acne_prone, sun_sensitive);
+  console.log("Email sent");
 })
 
 app.listen(5000, ()=> console.log("Server started at port 5000"))

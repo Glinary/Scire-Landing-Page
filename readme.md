@@ -14,6 +14,7 @@ navigate to `server` directory
 "npm i express-session"
 "npm i cookie-parser"
 "npm install googleapis@95.0.0"
+"npm install nodemailer"
 "npm run dev"
 ```
 edit package.json from `server` directory with `"proxy": "http://localhost:5000"`
