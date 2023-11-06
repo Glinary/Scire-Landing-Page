@@ -1,6 +1,7 @@
 import { Button, ThemeProvider } from "@mui/material";
 import React, { useState } from "react";
 import theme from "./theme";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 // The main quiz section
 
@@ -42,58 +43,65 @@ const questions = [
     options: ["Frequent", "Seldom"],
   },
   {
-    question: "Have you ever had a sunburn or noticed pigmentation changes after sun exposure?",
+    question:
+      "Have you ever had a sunburn or noticed pigmentation changes after sun exposure?",
     options: ["Yes", "No"],
   },
 ];
 
 function connectToDatabase() {
-  console.log("I am at connectToDatabase()")
+  console.log("I am at connectToDatabase()");
   let userData = {
-    sessionId:"sampleSessionId"
-  }
+    sessionId: "sampleSessionId",
+  };
   fetch("/api/start", {
-    method: 'post',
+    method: "post",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body:JSON.stringify(userData)
-  }).then(response=>response.json()).then(data=>{
-    console.log(data)
+    body: JSON.stringify(userData),
   })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
 
 function storeResponse(currentQuestion, letter) {
-  console.log("I am at storeResponse()")
+  console.log("I am at storeResponse()");
   let userData = {
     currentQuestion: currentQuestion,
-    letter: letter
-  }
+    letter: letter,
+  };
   fetch("/api/storeResponse", {
-    method: 'post',
+    method: "post",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body:JSON.stringify(userData)
-  }).then(response=>response.json()).then(data=>{
-    console.log(data)
+    body: JSON.stringify(userData),
   })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
 
 function storeEmail(email) {
-  console.log("I am at storeEmail()")
+  console.log("I am at storeEmail()");
   let userData = {
-    email:email
-  }
+    email: email,
+  };
   fetch("/api/storeEmail", {
-    method: 'post',
+    method: "post",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body:JSON.stringify(userData)
-  }).then(response=>response.json()).then(data=>{
-    console.log(data)
+    body: JSON.stringify(userData),
   })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
 
 function Test() {
@@ -106,18 +114,24 @@ function Test() {
 
   // When the start test button is clicked
   const handleStartTest = () => {
-    console.log("I am at handleStartTest()")
+    console.log("I am at handleStartTest()");
     connectToDatabase();
     setShowTest(true);
   };
-
 
   // Landing page shown before the test starts
   if (!showTest) {
     return (
       <div className="flex flex-row justify-center mb-24">
         <ThemeProvider theme={theme}>
-          <button onClick={handleStartTest}>Start Test</button>
+          <Button
+            variant="outlined"
+            color="primary"
+            className="text-emerald-900"
+            onClick={handleStartTest}
+          >
+            Start Test
+          </Button>
         </ThemeProvider>
       </div>
     );
@@ -125,7 +139,7 @@ function Test() {
 
   // When a test option is clicked
   const handleAnswer = (option) => {
-    console.log("I am at handleAnswer")
+    console.log("I am at handleAnswer");
     const index = options.indexOf(option);
     const letter = String.fromCharCode(index + 65);
     setAnswers([...answers, letter]);
@@ -156,113 +170,118 @@ function Test() {
   // Process a get request to /api/getResults and return the JSON result
   function getAnswers() {
     return fetch("/api/getResults", {
-      method: 'get',
+      method: "get",
       headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(response=>response.json());
+        "Content-Type": "application/json",
+      },
+    }).then((response) => response.json());
   }
 
   // Process the answers and return the final result
   const processAnswers = (answers) => {
-
     let skin_type, acne_prone, sun_sensitive;
-    
-    getAnswers().then(data=> {
 
-      // Get answers to each question
-      const q1 = data.option0;
-      const q2 = data.option1;
-      const q3 = data.option2;
-      const q4 = data.option3;
-      const q5 = data.option4;
+    getAnswers()
+      .then((data) => {
+        // Get answers to each question
+        const q1 = data.option0;
+        const q2 = data.option1;
+        const q3 = data.option2;
+        const q4 = data.option3;
+        const q5 = data.option4;
 
-      if (q1 === "A") {
-        if (q2 === "C" || q2 === "D") {
-          skin_type = "Dry";
-        } else if (q2 === "G") {
-          skin_type = "Normal";
-        } else if (q2 === "A" || q2 === "B" || q2 === "E") {
-          skin_type = "Combination";
-        } else if (q2 === "F") {
-          skin_type = "Sensitive";
-        }
-      } else if (q1 === "B") {
-        if (q2 === "B") {
-          if (q3 === "A") {
-            skin_type = "Oily";
-          } else {
-            skin_type = "Normal";
-          }
-        } else if (q2 === "C" || q2 === "D") {
-          if (q3 === "B") {
-            skin_type = "Combination";
-          } else {
+        if (q1 === "A") {
+          if (q2 === "C" || q2 === "D") {
             skin_type = "Dry";
-          }
-        } else if (q2 === "A" || q2 === "E") {
-          skin_type = "Combination";
-        } else if (q2 === "F") {
-          skin_type = "Sensitive";
-        }
-      } else if (q1 === "C") {
-        if (q2 === "F") {
-          skin_type = "Sensitive";
-        } else if (q2 === "B") {
-          if (q3 === "A" || q3 === "B") {
-            skin_type = "Oily";
-          } else if (q3 === "C" || q3 === "D") {
+          } else if (q2 === "G") {
+            skin_type = "Normal";
+          } else if (q2 === "A" || q2 === "B" || q2 === "E") {
             skin_type = "Combination";
+          } else if (q2 === "F") {
+            skin_type = "Sensitive";
           }
-        } else {
-          skin_type = "Combination";
-        }
-      } else if (q1 === "D") {
-        if (q2 === "F") {
-          skin_type = "Sensitive";
-        } else if (q2 === "A" || q2 === "E") {
-          skin_type = "Combination";
-        } else if (q2 === "G") {
-          if (q3 === "A" || q3 === "B") {
-            skin_type = "Oily";
+        } else if (q1 === "B") {
+          if (q2 === "B") {
+            if (q3 === "A") {
+              skin_type = "Oily";
+            } else {
+              skin_type = "Normal";
+            }
+          } else if (q2 === "C" || q2 === "D") {
+            if (q3 === "B") {
+              skin_type = "Combination";
+            } else {
+              skin_type = "Dry";
+            }
+          } else if (q2 === "A" || q2 === "E") {
+            skin_type = "Combination";
+          } else if (q2 === "F") {
+            skin_type = "Sensitive";
+          }
+        } else if (q1 === "C") {
+          if (q2 === "F") {
+            skin_type = "Sensitive";
+          } else if (q2 === "B") {
+            if (q3 === "A" || q3 === "B") {
+              skin_type = "Oily";
+            } else if (q3 === "C" || q3 === "D") {
+              skin_type = "Combination";
+            }
           } else {
             skin_type = "Combination";
           }
-        } else {
-          skin_type = "Oily";
+        } else if (q1 === "D") {
+          if (q2 === "F") {
+            skin_type = "Sensitive";
+          } else if (q2 === "A" || q2 === "E") {
+            skin_type = "Combination";
+          } else if (q2 === "G") {
+            if (q3 === "A" || q3 === "B") {
+              skin_type = "Oily";
+            } else {
+              skin_type = "Combination";
+            }
+          } else {
+            skin_type = "Oily";
+          }
         }
-      }
-  
-      if (q4 === "A") {
-        acne_prone = "Acne Prone";
-      } else {
-        acne_prone = "Not Acne Prone";
-      }
-    
-      if (q5 === "A") {
-        sun_sensitive = "Sun Sensitive";
-      } else {
-        sun_sensitive = "Not Sun Sensitive";
-      }
 
-    }).catch(error => {
-      console.error("An error occurred:", error);
-    })
-    
+        if (q4 === "A") {
+          acne_prone = "Acne Prone";
+        } else {
+          acne_prone = "Not Acne Prone";
+        }
+
+        if (q5 === "A") {
+          sun_sensitive = "Sun Sensitive";
+        } else {
+          sun_sensitive = "Not Sun Sensitive";
+        }
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      });
+
     // Return results if email has been submitted
     return (
       <div>
         <p>
-          Thank you for answering the questions!<br/>
-          Here's your assessment:<br/>
-          Skin Type: {skin_type}<br/>
-          Acne Prone: {acne_prone}<br/>
-          Sun-Sensitive: {sun_sensitive}<br/>
-          If you have any more questions or need further assistance, feel free to ask!<br/>
+          Thank you for answering the questions!
+          <br />
+          Here's your assessment:
+          <br />
+          Skin Type: {skin_type}
+          <br />
+          Acne Prone: {acne_prone}
+          <br />
+          Sun-Sensitive: {sun_sensitive}
+          <br />
+          If you have any more questions or need further assistance, feel free
+          to ask!
+          <br />
         </p>
       </div>
     );
-
   };
 
   // When all questions have been asked
@@ -276,16 +295,14 @@ function Test() {
               Email:
               <input type="email" value={email} onChange={handleEmailChange} />
             </label>
-            <button type="submit" disabled={email.trim() === ""}>Submit</button>
+            <button type="submit" disabled={email.trim() === ""}>
+              Submit
+            </button>
           </form>
         </div>
       );
     } else {
-      return (
-        <div>
-          {processAnswers(answers)}
-        </div>
-      );
+      return <div>{processAnswers(answers)}</div>;
     }
   }
 
@@ -294,18 +311,41 @@ function Test() {
 
   // Display the current question and options
   return (
-    <div>
-      <h2>{question}</h2>
-      <ul>
-        {options.map((option) => (
-          <li key={option}>
-            <button onClick={() => handleAnswer(option)}>{option}</button>
-          </li>
-        ))}
-      </ul>
-      {currentQuestion > 0 && (
-        <button onClick={handleBack}>Back</button>
-      )}
+    <div className="flex rounded-lg bg-emerald-900 m-8 mx-20">
+      {/* progress */}
+      <div>Guidelines Test Result</div>
+
+      {/* question */}
+      <div className="flex-1 bg-white m-5 rounded-md">
+        <div className="px-80">
+          <h2 className="font-bold text-center py-4">{question}</h2>
+          <ul>
+            {options.map((option) => (
+              // wrap li in button
+              <button
+                className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                key={option}
+                onClick={() => handleAnswer(option)}
+              >
+                <li>{option}</li>
+              </button>
+            ))}
+          </ul>
+
+          {currentQuestion > 0 && (
+            <ThemeProvider theme={theme}>
+              <Button
+                variant="text"
+                className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
+                onClick={handleBack}
+                startIcon={<ArrowBackIcon />}
+              >
+                Back
+              </Button>
+            </ThemeProvider>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
