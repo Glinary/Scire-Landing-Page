@@ -210,7 +210,7 @@ function Test() {
     setAnswers(answers.slice(0, -1));
   };
 
-  // Process a get request to /api/getResults and return the JSON result
+  // Process a get request to /api/getAnswers and return the JSON result
   function getAnswers() {
     return fetch("/api/getAnswers", {
       method: "get",
