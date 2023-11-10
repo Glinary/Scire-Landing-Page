@@ -27,6 +27,7 @@ or
 navigate to `client` directory
 ```
 npm install
+npm install axios
 npm start
 ```
 
