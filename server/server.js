@@ -122,6 +122,8 @@ app.get('/api/getAnswers', (req, res)=> {
   let option3 = req.session.option3;
   let option4 = req.session.option4;
 
+  console.log("GETANSWERSGOT", option0, option1, option2, option3, option4);
+
   const responseData = {
     option0,
     option1,
@@ -162,7 +164,6 @@ app.post('/api/start', (req, res)=> {
 // stores the response of the user in each question
 app.post('/api/storeResponse', (req, res)=> {
   let {currentQuestion, letter} = req.body
-  
   switch (currentQuestion) {
     case 0:
       req.session.option0 = letter;
