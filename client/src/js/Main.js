@@ -286,7 +286,6 @@ function Test() {
     let skin_type, acne_prone, sun_sensitive;
     
     axios.get("/api/getAnswers").then(function(response) {
-      console.log("QQQQQQQ",response)
       const q1 = response.data.option0
       const q2 = response.data.option1
       const q3 = response.data.option2
