@@ -42,3 +42,10 @@ p {
 #whitespace {
   height: 15em;
 }
+
+#landing-page {
+  background-image: url('assets/Orange Flower.png'), url('assets/model.png');
+  background-position: 0% -60%, 110% 30%;
+  background-size: 20%, 35%;
+  background-repeat: no-repeat, no-repeat;
+}
