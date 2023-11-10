@@ -38,3 +38,7 @@ p {
 #about-container {
   background-color: #DA9B2A
 }
+
+#whitespace {
+  height: 15em;
+}
