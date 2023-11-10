@@ -204,7 +204,6 @@ function Test() {
   const [skinType, setSkinType] = useState(null);
   const [acneProne, setAcneProne] = useState(null);
   const [sunSensitive, setSunSensitive] = useState(null);
-  const [qData, setQ] = useState(null);
 
 
 
@@ -255,7 +254,6 @@ function Test() {
     console.log("I am  at handleEmailSubmit");
     event.preventDefault();
     await storeEmail(email);
-    await getAnswers();
     await processAnswers();
     console.log(email);
     setEmailSubmitted(true);
@@ -287,94 +285,90 @@ function Test() {
   const processAnswers = async () => {
     let skin_type, acne_prone, sun_sensitive;
     
-    // const q1 = qData.option0;
-    // const q2 = qData.option1;
-    // const q3 = qData.option2;
-    // const q4 = qData.option3;
-    // const q5 = qData.option4;
-    console.log("ProcessAnswer Data v1:", qData)
-    const q1 = "A"
-    const q2 = "A"
-    const q3 = "A"
-    const q4 = "A"
-    const q5 = "A"
-    console.log("ProcessAnswer Data v2", q1, q2, q3, q4, q5);
+    axios.get("/api/getAnswers").then(function(response) {
+      console.log("QQQQQQQ",response)
+      const q1 = response.data.option0
+      const q2 = response.data.option1
+      const q3 = response.data.option2
+      const q4 = response.data.option3
+      const q5 = response.data.option4
 
-    if (q1 === "A") {
-      if (q2 === "C" || q2 === "D") {
-        skin_type = "Dry";
-      } else if (q2 === "G") {
-       skin_type = "Normal";
-      } else if (q2 === "A" || q2 === "B" || q2 === "E") {
-        skin_type = "Combination";
-      } else if (q2 === "F") {
-        skin_type = "Sensitive";
-      }
-    } else if (q1 === "B") {
-      if (q2 === "B") {
-        if (q3 === "A") {
-          skin_type = "Oily";
-        } else {
-          skin_type = "Normal";
-        }
-      } else if (q2 === "C" || q2 === "D") {
-        if (q3 === "B") {
-          skin_type = "Combination";
-        } else {
+      if (q1 === "A") {
+        if (q2 === "C" || q2 === "D") {
           skin_type = "Dry";
-        }
-      } else if (q2 === "A" || q2 === "E") {
-        skin_type = "Combination";
-      } else if (q2 === "F") {
-        skin_type = "Sensitive";
-      }
-    } else if (q1 === "C") {
-      if (q2 === "F") {
-        skin_type = "Sensitive";
-          } else if (q2 === "B") {
-        if (q3 === "A" || q3 === "B") {
-          skin_type = "Oily";
-        } else if (q3 === "C" || q3 === "D") {
+        } else if (q2 === "G") {
+         skin_type = "Normal";
+        } else if (q2 === "A" || q2 === "B" || q2 === "E") {
           skin_type = "Combination";
+        } else if (q2 === "F") {
+          skin_type = "Sensitive";
         }
-      } else {
-        skin_type = "Combination";
-      }
-    } else if (q1 === "D") {
-      if (q2 === "F") {
-        skin_type = "Sensitive";
-      } else if (q2 === "A" || q2 === "E") {
-        skin_type = "Combination";
-      } else if (q2 === "G") {
-        if (q3 === "A" || q3 === "B") {
-          skin_type = "Oily";
+      } else if (q1 === "B") {
+        if (q2 === "B") {
+          if (q3 === "A") {
+            skin_type = "Oily";
+          } else {
+            skin_type = "Normal";
+          }
+        } else if (q2 === "C" || q2 === "D") {
+          if (q3 === "B") {
+            skin_type = "Combination";
+          } else {
+            skin_type = "Dry";
+          }
+        } else if (q2 === "A" || q2 === "E") {
+          skin_type = "Combination";
+        } else if (q2 === "F") {
+          skin_type = "Sensitive";
+        }
+      } else if (q1 === "C") {
+        if (q2 === "F") {
+          skin_type = "Sensitive";
+            } else if (q2 === "B") {
+          if (q3 === "A" || q3 === "B") {
+            skin_type = "Oily";
+          } else if (q3 === "C" || q3 === "D") {
+            skin_type = "Combination";
+          }
         } else {
           skin_type = "Combination";
         }
-      } else {
-        skin_type = "Oily";
+      } else if (q1 === "D") {
+        if (q2 === "F") {
+          skin_type = "Sensitive";
+        } else if (q2 === "A" || q2 === "E") {
+          skin_type = "Combination";
+        } else if (q2 === "G") {
+          if (q3 === "A" || q3 === "B") {
+            skin_type = "Oily";
+          } else {
+            skin_type = "Combination";
+          }
+        } else {
+          skin_type = "Oily";
+        }
       }
-    }
-
-    if (q4 === "A") {
-      acne_prone = "Acne Prone";
-    } else {
-      acne_prone = "Not Acne Prone";
-    }
-
-    if (q5 === "A") {
-      sun_sensitive = "Sun Sensitive";
-    } else {
-      sun_sensitive = "Not Sun Sensitive";
-    }
-
-    await storeResults(email, skin_type, acne_prone, sun_sensitive);
-        
-    setSkinType(skin_type);
-    setAcneProne(acne_prone);
-    setSunSensitive(sun_sensitive);
-
-    console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
+  
+      if (q4 === "A") {
+        acne_prone = "Acne Prone";
+      } else {
+        acne_prone = "Not Acne Prone";
+      }
+  
+      if (q5 === "A") {
+        sun_sensitive = "Sun Sensitive";
+      } else {
+        sun_sensitive = "Not Sun Sensitive";
+      }
+  
+      storeResults(email, skin_type, acne_prone, sun_sensitive);
+          
+      setSkinType(skin_type);
+      setAcneProne(acne_prone);
+      setSunSensitive(sun_sensitive);
+  
+      console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
+    })
   };
 
   // When all questions have been asked
