@@ -317,6 +317,8 @@ function Test() {
           skin_type = "Combination";
         } else if (q2 === "F") {
           skin_type = "Sensitive";
+        } else if (q2 === "G") {
+          skin_type = "Normal";
         }
       } else if (q1 === "C") {
         if (q2 === "F") {
