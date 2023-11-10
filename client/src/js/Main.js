@@ -165,7 +165,7 @@ function Test() {
   // Landing page shown before the test starts
   if (!showTest) {
     return (
-      <div>
+      <div id="landing-page">
         <div className="flex flex-row justify-center mb-24">
           <ThemeProvider theme={theme}>
             <Button
