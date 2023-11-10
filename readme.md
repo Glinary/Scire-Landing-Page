@@ -17,13 +17,18 @@ navigate to `server` directory
 "npm install nodemailer"
 "npm run dev"
 ```
+or 
+```
+"npm init -y"
+"npm i express dotenv express-session cookie-parser googleapis@95.0.0 nodemailer"
+"npm run dev"
+```
 
 navigate to `client` directory
 ```
-"npm i express dotenv express-session cookie-parser googleapis@95.0.0 nodemailer"
-"npm i axios"
-"npm install"
-"npm start"
+npm install
+npm install axios
+npm start
 ```
 
 

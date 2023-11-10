@@ -11,6 +11,7 @@ Dependencies under server directory:
 
 Dependencies under client directory:
 "npm install"
+"npm install axios"
 "npm start"
 */
 
