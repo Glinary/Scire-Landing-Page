@@ -27,3 +27,14 @@ p {
   font-family: "League Spartan";
   font-weight: normal;
 }
+
+#about {
+  background: url('assets/Leaf bg.png'), url('assets/scire round.png');
+  background-size: 50%, contain;
+  background-position: 50% 50%, center;
+  background-repeat: repeat, no-repeat;
+}
+
+#about-container {
+  background-color: #DA9B2A
+}
