@@ -165,17 +165,22 @@ function Test() {
   // Landing page shown before the test starts
   if (!showTest) {
     return (
-      <div className="flex flex-row justify-center mb-24">
-        <ThemeProvider theme={theme}>
-          <Button
-            variant="outlined"
-            color="primary"
-            className="text-emerald-900"
-            onClick={handleStartTest}
-          >
-            Start Test
-          </Button>
-        </ThemeProvider>
+      <div>
+        <div className="flex flex-row justify-center mb-24">
+          <ThemeProvider theme={theme}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className="text-emerald-900"
+              onClick={handleStartTest}
+            >
+              Start Test
+            </Button>
+          </ThemeProvider>
+        </div>
+
+        <div id="whitespace">
+        </div>
       </div>
     );
   }
@@ -396,6 +401,7 @@ function Test() {
             </ThemeProvider>
           )}
         </div>
+        <div id="main-filler"></div>
       </div>
     </div>
   );
