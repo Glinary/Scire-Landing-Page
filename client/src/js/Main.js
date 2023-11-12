@@ -2,6 +2,8 @@ import { Button, ThemeProvider } from "@mui/material";
 import React, { useState } from "react";
 import theme from "./theme";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Header from "./Header";
+import TestHeader from "./TestHeader";
 
 // The main quiz section
 
@@ -166,6 +168,7 @@ function Test() {
   if (!showTest) {
     return (
       <div id="landing-page">
+        <Header />
         <div className="flex flex-row justify-center mb-24">
           <ThemeProvider theme={theme}>
             <Button
@@ -179,7 +182,7 @@ function Test() {
           </ThemeProvider>
         </div>
 
-        <div id="whitespace">
+        <div id="whitespace" className="h-40">
         </div>
       </div>
     );
@@ -367,41 +370,44 @@ function Test() {
 
   // Display the current question and options
   return (
-    <div className="flex rounded-lg bg-emerald-900 m-8 mx-20">
-      {/* progress */}
-      <div>Guidelines Test Result</div>
+    <div id="quiz-page">
+      <TestHeader />
+      <div className="flex rounded-lg bg-emerald-900 m-8 mx-20">
+        {/* progress */}
+        <div>Guidelines Test Result</div>
 
-      {/* question */}
-      <div className="flex-1 bg-white m-5 rounded-md">
-        <div className="px-80">
-          <h2 className="font-bold text-center py-4">{question}</h2>
-          <ul>
-            {options.map((option) => (
-              // wrap li in button
-              <button
-                className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
-                key={option}
-                onClick={() => handleAnswer(option)}
-              >
-                <li>{option}</li>
-              </button>
-            ))}
-          </ul>
+        {/* question */}
+        <div className="flex-1 bg-white m-5 rounded-md">
+          <div className="px-80">
+            <h2 className="font-bold text-center py-4">{question}</h2>
+            <ul>
+              {options.map((option) => (
+                // wrap li in button
+                <button
+                  className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                  key={option}
+                  onClick={() => handleAnswer(option)}
+                >
+                  <li>{option}</li>
+                </button>
+              ))}
+            </ul>
 
-          {currentQuestion > 0 && (
-            <ThemeProvider theme={theme}>
-              <Button
-                variant="text"
-                className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
-                onClick={handleBack}
-                startIcon={<ArrowBackIcon />}
-              >
-                Back
-              </Button>
-            </ThemeProvider>
-          )}
+            {currentQuestion > 0 && (
+              <ThemeProvider theme={theme}>
+                <Button
+                  variant="text"
+                  className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
+                  onClick={handleBack}
+                  startIcon={<ArrowBackIcon />}
+                >
+                  Back
+                </Button>
+              </ThemeProvider>
+            )}
+          </div>
+          <div id="main-filler"></div>
         </div>
-        <div id="main-filler"></div>
       </div>
     </div>
   );
