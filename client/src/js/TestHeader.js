@@ -8,7 +8,7 @@ import theme from "./theme";
 const TestHeader = () => {
   return (
     <div className="flex flex-col items-center pt-20">
-      <div id="header-whitespace"></div>
+      <div id="header-whitespace" className="h-16"></div>
       
       <h1 className="text-5xl py-1" id="test-header">SKIN TEST</h1>
       
