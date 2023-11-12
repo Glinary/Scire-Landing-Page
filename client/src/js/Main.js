@@ -323,7 +323,8 @@ function Test() {
 
     // Return results if email has been submitted
     return (
-      <div>
+      <div id="results">
+        <TestHeader />
         <p>
           Thank you for answering the questions!
           <br />
@@ -347,7 +348,9 @@ function Test() {
   if (currentQuestion >= questions.length) {
     if (!emailSubmitted) {
       return (
-        <div>
+        <div id="email-input">
+          <TestHeader />
+          
           <h2>Enter your email to save your result</h2>
           <form onSubmit={handleEmailSubmit}>
             <label>
