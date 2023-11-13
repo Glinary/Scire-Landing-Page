@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import theme from "./theme";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "./Header";
-import TestHeader from "./TestHeader";
 
 // The main quiz section
 
@@ -324,7 +323,7 @@ function Test() {
     // Return results if email has been submitted
     return (
       <div id="results">
-        <TestHeader />
+        <Header />
         <p>
           Thank you for answering the questions!
           <br />
@@ -349,7 +348,7 @@ function Test() {
     if (!emailSubmitted) {
       return (
         <div id="email-input">
-          <TestHeader />
+          <Header />
           
           <h2>Enter your email to save your result</h2>
           <form onSubmit={handleEmailSubmit}>
@@ -373,9 +372,9 @@ function Test() {
 
   // Display the current question and options
   return (
-    <div id="quiz-page">
-      <TestHeader />
-      <div className="flex rounded-lg bg-emerald-900 m-8 mx-20">
+    <div id="quiz-page" className="pb-8">
+      <Header />
+      <div className="flex rounded-lg bg-emerald-900 mt-8 mx-20">
         {/* progress */}
         <div>Guidelines Test Result</div>
 
