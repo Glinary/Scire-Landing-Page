@@ -47,10 +47,6 @@ p {
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
 }
 
-#test-header {
-  font-family: "Koulen";
-}
-
 #quiz-page, #email-input, #results {
   background-image: url('assets/orange flower rotate_18.png'), url('assets/scire logo.png'), url('assets/purple flower rotate_15.png');
   background-position: 0% 100%, 5% 2%, 100% 0%;
