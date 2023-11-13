@@ -264,22 +264,20 @@ function Test() {
     setEmail(event.target.value);
   };
 
-  
+  // const getAnswers = async () => {
+  //   // await fetch("/api/getAnswers", {
+  //   //   method: "get",
+  //   //   headers: {
+  //   //     "Content-Type": "application/json",
+  //   //   },
+  //   // }).then((response) => response.json()).then((data)=> {
+  //   //   setQ(data);
+  //   // });
 
-  const getAnswers = async () => {
-    // await fetch("/api/getAnswers", {
-    //   method: "get",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // }).then((response) => response.json()).then((data)=> {
-    //   setQ(data);
-    // });
-
-    axios.get("/api/getAnswers").then(function(response) {
-      console.log(response)
-    })
-  }
+  //   axios.get("/api/getAnswers").then(function(response) {
+  //     console.log(response)
+  //   })
+  // }
 
     // Process the answers and return the final result
   const processAnswers = async () => {
@@ -319,6 +317,8 @@ function Test() {
           skin_type = "Combination";
         } else if (q2 === "F") {
           skin_type = "Sensitive";
+        } else if (q2 === "G") {
+          skin_type = "Normal";
         }
       } else if (q1 === "C") {
         if (q2 === "F") {

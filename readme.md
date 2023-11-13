@@ -8,27 +8,14 @@ Instructions will be updated once this project is finalized.
 
 navigate to `server` directory
 ```
-"npm init -y"
-"npm i express"
-"npm i dotenv"
-"npm i express-session"
-"npm i cookie-parser"
-"npm install googleapis@95.0.0"
-"npm install nodemailer"
-"npm run dev"
-```
-or 
-```
-"npm init -y"
-"npm i express dotenv express-session cookie-parser googleapis@95.0.0 nodemailer"
+"npm install"
 "npm run dev"
 ```
 
 navigate to `client` directory
 ```
-npm install
-npm install axios
-npm start
+"npm install"
+"npm start"
 ```
 
 
