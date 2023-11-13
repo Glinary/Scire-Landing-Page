@@ -31,7 +31,7 @@ p {
 
 #about {
   background: url('assets/Leaf bg.png'), url('assets/scire round.png');
-  background-size: 50%, contain;
+  background-size: 28%, contain;
   background-position: 50% 50%, center;
   background-repeat: repeat, no-repeat;
 }
