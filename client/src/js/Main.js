@@ -400,7 +400,9 @@ function Test() {
       return <div>{
           // Return results if email has been submitted
           (
-            <div>
+            
+            <div id='results'>
+              <Header />
               <p>
                 Thank you for answering the questions!
                 <br />
