@@ -2,6 +2,7 @@ import { Button, ThemeProvider } from "@mui/material";
 import React, { useState } from "react";
 import theme from "./theme";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Header from "./Header";
 import axios from 'axios';
 
 // The main quiz section
@@ -218,17 +219,23 @@ function Test() {
   // Landing page shown before the test starts
   if (!showTest) {
     return (
-      <div className="flex flex-row justify-center mb-24">
-        <ThemeProvider theme={theme}>
-          <Button
-            variant="outlined"
-            color="primary"
-            className="text-emerald-900"
-            onClick={handleStartTest}
-          >
-            Start Test
-          </Button>
-        </ThemeProvider>
+      <div id="landing-page">
+        <Header />
+        <div className="flex flex-row justify-center mb-24">
+          <ThemeProvider theme={theme}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className="text-emerald-900"
+              onClick={handleStartTest}
+            >
+              Start Test
+            </Button>
+          </ThemeProvider>
+        </div>
+
+        <div id="whitespace" className="h-40">
+        </div>
       </div>
     );
   }
@@ -374,7 +381,9 @@ function Test() {
   if (currentQuestion >= questions.length) {
     if (!emailSubmitted) {
       return (
-        <div>
+        <div id="email-input">
+          <Header />
+          
           <h2>Enter your email to save your result</h2>
           <form onSubmit={handleEmailSubmit}>
             <label>
@@ -391,7 +400,9 @@ function Test() {
       return <div>{
           // Return results if email has been submitted
           (
-            <div>
+            
+            <div id='results'>
+              <Header />
               <p>
                 Thank you for answering the questions!
                 <br />
@@ -418,39 +429,43 @@ function Test() {
   
   // Display the current question and options
   return (
-    <div className="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row rounded-lg bg-emerald-900 m-8 sm:mx-20">
-      {/* progress */}
-      <div>Guidelines Test Result</div>
+    <div id="quiz-page" className="pb-8">
+      <Header />
+      <div className="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row rounded-lg bg-emerald-900 mt-8 sm:mx-20">
+        {/* progress */}
+        <div>Guidelines Test Result</div>
 
-      {/* question */}
-      <div className="flex-1 bg-white m-5 rounded-md">
-        <div className="px-4 sm:px-20 md:px-40 lg:px-60 xl:px-80">
-          <h2 className="font-bold text-center py-4">{question}</h2>
-          <ul>
-            {options.map((option) => (
-              // wrap li in button
-              <button
-                className="block w-full rounded-md bg-emerald-600 my-5 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
-                key={option}
-                onClick={() => handleAnswer(option)}
-              >
-                <li>{option}</li>
-              </button>
-            ))}
-          </ul>
+        {/* question */}
+        <div className="flex-1 bg-white m-5 rounded-md">
+          <div className="px-4 sm:px-20 md:px-40 lg:px-60 xl:px-80">
+            <h2 className="font-bold text-center py-4">{question}</h2>
+            <ul>
+              {options.map((option) => (
+                // wrap li in button
+                <button
+                  className="block w-full rounded-md bg-emerald-600 my-5 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                  key={option}
+                  onClick={() => handleAnswer(option)}
+                >
+                  <li>{option}</li>
+                </button>
+              ))}
+            </ul>
 
-          {currentQuestion > 0 && (
-            <ThemeProvider theme={theme}>
-              <Button
-                variant="text"
-                className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
-                onClick={()=>handleBack()}
-                startIcon={<ArrowBackIcon />}
-              >
-                Back
-              </Button>
-            </ThemeProvider>
-          )}
+            {currentQuestion > 0 && (
+              <ThemeProvider theme={theme}>
+                <Button
+                  variant="text"
+                  className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
+                  onClick={handleBack}
+                  startIcon={<ArrowBackIcon />}
+                >
+                  Back
+                </Button>
+              </ThemeProvider>
+            )}
+          </div>
+          <div id="main-filler"></div>
         </div>
       </div>
     </div>
