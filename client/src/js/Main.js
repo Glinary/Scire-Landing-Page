@@ -351,22 +351,29 @@ function Test() {
         </div>
 
         <div className="flex-1 bg-white mx-5 rounded-md">
-          <div className="px-52">
-            <p>
-              Thank you for answering the questions!
-              <br />
-              Here's your assessment:
-              <br />
-              Skin Type: {skinType}
-              <br />
-              Acne Prone: {acneProne}
-              <br />
-              Sun-Sensitive: {sunSensitive}
-              <br />
-              If you have any more questions or need further assistance, feel
-              free to ask!
-              <br />
-            </p>
+          <div className="px-52 py-5">
+            <h2 className="font-bold text-center">Here's your diagnosis:</h2>
+
+            <div className="flex flex-row mx-16 py-2 justify-center">
+              <p className="py-1">Skin Type:</p>
+              <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                {skinType}
+              </h2>
+            </div>
+
+            <div className="flex flex-row mx-16 py-2 justify-center">
+              <p className="py-1">Acne Prone:</p>
+              <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                {acneProne}
+              </h2>
+            </div>
+
+            <div className="flex flex-row mx-16 py-2 justify-center">
+              <p className="py-1">Sun-sensitive:</p>
+              <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                {sunSensitive}
+              </h2>
+            </div>
           </div>
         </div>
       </div>
