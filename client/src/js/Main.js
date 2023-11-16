@@ -1,5 +1,5 @@
-import { Button, ThemeProvider, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Button, ThemeProvider } from "@mui/material";
+import React, { useState } from "react";
 import { theme, quizTheme } from "./theme";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -420,6 +420,14 @@ function Test() {
                   </button>
                 </div>
               </form>
+
+              <div className="flex justify-center items-end pb-5">
+                <p className="text-center text-xs">
+                  *By entering your email, you consent to receive marketing
+                  emails. For further informtation, please consult our Privacy
+                  Policy.
+                </p>
+              </div>
             </div>
           </div>
         </div>
