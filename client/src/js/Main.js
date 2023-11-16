@@ -52,7 +52,7 @@ const questions = [
 ];
 
 function connectToDatabase() {
-  console.log("I am at connectToDatabase()");
+  //console.log("I am at connectToDatabase()");
   // let userData = {
   //   sessionId: "sampleSessionId",
   // };
@@ -78,7 +78,7 @@ function connectToDatabase() {
 }
 
 function storeResponse(currentQuestion, letter) {
-  console.log("I am at storeResponse()");
+  //console.log("I am at storeResponse()");
   // let userData = {
   //   currentQuestion: currentQuestion,
   //   letter: letter,
@@ -106,7 +106,7 @@ function storeResponse(currentQuestion, letter) {
 }
 
 async function storeEmail (email) {
-  console.log("I am at storeEmail()");
+  //console.log("I am at storeEmail()");
   // let userData = {
   //   email: email,
   // };
@@ -134,7 +134,7 @@ async function storeEmail (email) {
 
 // store the results and send the email
 async function storeResults(email, skin_type, acne_prone, sun_sensitive) {
-  console.log("I am at storeResults()");
+  //console.log("I am at storeResults()");
   sendEmail(email, skin_type, acne_prone, sun_sensitive);
   // let userResults = {
   //   skin_type: skin_type,
@@ -162,7 +162,7 @@ async function storeResults(email, skin_type, acne_prone, sun_sensitive) {
 }
 
 async function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
-  console.log("I am at sendEmail()");
+  //console.log("I am at sendEmail()");
   // let userResults = {
   //   email: email,
   //   skin_type: skin_type,
@@ -211,7 +211,7 @@ function Test() {
 
   // When the start test button is clicked
   const handleStartTest = () => {
-    console.log("I am at handleStartTest()");
+    //console.log("I am at handleStartTest()");
     connectToDatabase();
     setShowTest(true);
   };
@@ -242,7 +242,7 @@ function Test() {
 
   // When a test option is clicked
   const handleAnswer = (option) => {
-    console.log("I am at handleAnswer")
+    //console.log("I am at handleAnswer")
     const index = options.indexOf(option);
     const letter = String.fromCharCode(index + 65);
     setAnswers([...answers, letter]);
@@ -258,11 +258,11 @@ function Test() {
 
   // When email form is submitted
   const handleEmailSubmit = async (event) => {
-    console.log("I am  at handleEmailSubmit");
+    //console.log("I am  at handleEmailSubmit");
     event.preventDefault();
     await storeEmail(email);
     await processAnswers();
-    console.log(email);
+    //console.log(email);
     setEmailSubmitted(true);
   };
 
@@ -373,7 +373,7 @@ function Test() {
       setAcneProne(acne_prone);
       setSunSensitive(sun_sensitive);
   
-      console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
+      //console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
     })
   };
 
