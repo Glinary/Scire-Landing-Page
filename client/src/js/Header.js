@@ -7,23 +7,23 @@ import { theme } from "./theme";
 
 const Header = () => {
   return (
-    /* Scire Essentials Logo */
-
     <div className="flex flex-col items-center pt-20 pb-7">
       <h1 className="text-5xl py-1" id="header">
         SkinGenius
       </h1>
       <p className="pb-1" id="header">
+
         The beginning of your skin care journey
       </p>
-      <p className="text-center pt-5">
+      
+      <p className="text-xl text-center pt-5">
         Scire Essentials presents you a test to check your skin type and become{" "}
-        <br />
+        <br/>
         aware which products and routine suits your skin better.
       </p>
 
       <div className="flex flex-row items-center justify-center">
-        <p className="text-center py-6 pr-2">
+        <p className="text-xl text-center py-6 pr-2">
           You may also try our Messenger chatbot here:
         </p>
 
