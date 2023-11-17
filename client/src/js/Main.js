@@ -431,19 +431,19 @@ function Test() {
   return (
     <div id="quiz-page" className="pb-8">
       <Header />
-      <div className="flex rounded-lg bg-emerald-900 mt-8 mx-20">
+      <div className="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row rounded-lg bg-emerald-900 mt-8 sm:mx-20">
         {/* progress */}
         <div>Guidelines Test Result</div>
 
         {/* question */}
         <div className="flex-1 bg-white m-5 rounded-md">
-          <div className="px-80">
+          <div className="px-4 sm:px-20 md:px-40 lg:px-60 xl:px-80">
             <h2 className="font-bold text-center py-4">{question}</h2>
             <ul>
               {options.map((option) => (
                 // wrap li in button
                 <button
-                  className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                  className="block w-full rounded-md bg-emerald-600 my-5 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
                   key={option}
                   onClick={() => handleAnswer(option)}
                 >
