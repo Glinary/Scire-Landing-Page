@@ -95,21 +95,6 @@ function connectToDatabase() {
 
 function storeResponse(currentQuestion, letter) {
   //console.log("I am at storeResponse()");
-  // let userData = {
-  //   currentQuestion: currentQuestion,
-  //   letter: letter,
-  // };
-  // fetch("/api/storeResponse", {
-  //   method: "post",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(userData),
-  // })
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     console.log(data);
-  //   });
 
   // axios version
   axios.post("/api/storeResponse", {
@@ -123,20 +108,6 @@ function storeResponse(currentQuestion, letter) {
 
 async function storeEmail (email) {
   //console.log("I am at storeEmail()");
-  // let userData = {
-  //   email: email,
-  // };
-  // await fetch("/api/storeEmail", {
-  //   method: "post",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(userData),
-  // })
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     console.log(data);
-  //   });
 
   // axios version
   axios.post("/api/storeEmail", {
@@ -152,76 +123,23 @@ async function storeEmail (email) {
 async function storeResults(email, skin_type, acne_prone, sun_sensitive) {
   //console.log("I am at storeResults()");
   sendEmail(email, skin_type, acne_prone, sun_sensitive);
-  // let userResults = {
-  //   skin_type: skin_type,
-  //   acne_prone: acne_prone,
-  //   sun_sensitive: sun_sensitive
-  // };
-  // fetch("/api/storeResults", {
-  //   method: 'post',
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(userResults),
-  // }).then((response)=> response.json()).then((data)=>{
-  //   console.log(data)
-  // })
 
   axios.post("/api/storeResults", {
     skin_type: skin_type,
     acne_prone: acne_prone,
     sun_sensitive: sun_sensitive,
-  };
-  fetch("/api/storeResults", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userResults),
-
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+  });
 }
 
 async function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
   //console.log("I am at sendEmail()");
-  // let userResults = {
-  //   email: email,
-  //   skin_type: skin_type,
-  //   acne_prone: acne_prone,
-  //   sun_sensitive: sun_sensitive
-  // };
-  // fetch("/api/sendEmail", {
-  //   method: 'post',
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(userResults),
-  // }).then((response)=> response.json()).then((data)=>{
-  //   console.log(data)
-  // })
 
   axios.post("/api/sendEmail", {
     email: email,
     skin_type: skin_type,
     acne_prone: acne_prone,
     sun_sensitive: sun_sensitive,
-  };
-  fetch("/api/sendEmail", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userResults),
-
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+  });
 }
 
 // Process a get request to /api/getAnswers and return the JSON result
@@ -309,21 +227,6 @@ function Test() {
     setEmail(event.target.value);
   };
 
-  // const getAnswers = async () => {
-  //   // await fetch("/api/getAnswers", {
-  //   //   method: "get",
-  //   //   headers: {
-  //   //     "Content-Type": "application/json",
-  //   //   },
-  //   // }).then((response) => response.json()).then((data)=> {
-  //   //   setQ(data);
-  //   // });
-
-  //   axios.get("/api/getAnswers").then(function(response) {
-  //     console.log(response)
-  //   })
-  // }
-
     // Process the answers and return the final result
   const processAnswers = async () => {
     let skin_type, acne_prone, sun_sensitive;
@@ -391,7 +294,7 @@ function Test() {
         } else {
           skin_type = "Oily";
         }
-
+      }
         storeResults(email, skin_type, acne_prone, sun_sensitive);
 
         setSkinType(skin_type);
