@@ -1,6 +1,9 @@
 import { Button, ThemeProvider } from "@mui/material";
 import React, { useState } from "react";
-import theme from "./theme";
+import { theme, quizTheme } from "./theme";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "./Header";
 import axios from 'axios';
@@ -48,6 +51,19 @@ const questions = [
     question:
       "Have you ever had a sunburn or noticed pigmentation changes after sun exposure?",
     options: ["Yes", "No"],
+  },
+];
+
+// steps for the stepper
+const steps = [
+  {
+    label: "Guidelines",
+  },
+  {
+    label: "Test",
+  },
+  {
+    label: "Result",
   },
 ];
 
@@ -154,11 +170,20 @@ async function storeResults(email, skin_type, acne_prone, sun_sensitive) {
   axios.post("/api/storeResults", {
     skin_type: skin_type,
     acne_prone: acne_prone,
-    sun_sensitive: sun_sensitive
-  }).then(function(response) {
-    console.log(response)
-  })
+    sun_sensitive: sun_sensitive,
+  };
+  fetch("/api/storeResults", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userResults),
 
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
 
 async function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
@@ -183,10 +208,20 @@ async function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
     email: email,
     skin_type: skin_type,
     acne_prone: acne_prone,
-    sun_sensitive: sun_sensitive
-  }).then(function(response) {
-    console.log(response)
+    sun_sensitive: sun_sensitive,
+  };
+  fetch("/api/sendEmail", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userResults),
+
   })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
 
 // Process a get request to /api/getAnswers and return the JSON result
@@ -197,7 +232,9 @@ function getInitial() {
 
 function Test() {
   // Declaration of variables
-  const [currentQuestion, setCurrentQuestion] = useState(getInitial());
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+
   const [showTest, setShowTest] = useState(false);
   const [email, setEmail] = useState("");
   const [answers, setAnswers] = useState([]);
@@ -205,6 +242,7 @@ function Test() {
   const [skinType, setSkinType] = useState(null);
   const [acneProne, setAcneProne] = useState(null);
   const [sunSensitive, setSunSensitive] = useState(null);
+  const [guidelines, setGuidelines] = useState(true);
 
 
 
@@ -353,47 +391,124 @@ function Test() {
         } else {
           skin_type = "Oily";
         }
-      }
-  
-      if (q4 === "A") {
-        acne_prone = "Acne Prone";
-      } else {
-        acne_prone = "Not Acne Prone";
-      }
-  
-      if (q5 === "A") {
-        sun_sensitive = "Sun Sensitive";
-      } else {
-        sun_sensitive = "Not Sun Sensitive";
-      }
-  
-      storeResults(email, skin_type, acne_prone, sun_sensitive);
-          
-      setSkinType(skin_type);
-      setAcneProne(acne_prone);
-      setSunSensitive(sun_sensitive);
-  
-      //console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
-    })
+
+        storeResults(email, skin_type, acne_prone, sun_sensitive);
+
+        setSkinType(skin_type);
+        setAcneProne(acne_prone);
+        setSunSensitive(sun_sensitive);
+
+        console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      });
+
+    // Return results if email has been submitted
+    return (
+      <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+        {/* progress */}
+        <div className="flex items-center px-24">
+          <ThemeProvider theme={quizTheme}>
+            <Stepper activeStep={activeStep} orientation="vertical">
+              {steps.map((step) => (
+                <Step key={step.label}>
+                  <StepLabel>{step.label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </ThemeProvider>
+        </div>
+
+        <div className="flex-1 bg-white mx-5 rounded-md">
+          <div className="px-52 py-5">
+            <h2 className="font-bold text-center">Here's your diagnosis:</h2>
+
+            <div className="flex flex-row mx-16 py-2 justify-center">
+              <p className="py-1">Skin Type:</p>
+              <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                {skinType}
+              </h2>
+            </div>
+
+            <div className="flex flex-row mx-16 py-2 justify-center">
+              <p className="py-1">Acne Prone:</p>
+              <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                {acneProne}
+              </h2>
+            </div>
+
+            <div className="flex flex-row mx-16 py-2 justify-center">
+              <p className="py-1">Sun-sensitive:</p>
+              <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                {sunSensitive}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
   };
 
   // When all questions have been asked
   if (currentQuestion >= questions.length) {
     if (!emailSubmitted) {
       return (
-        <div id="email-input">
-          <Header />
-          
-          <h2>Enter your email to save your result</h2>
-          <form onSubmit={handleEmailSubmit}>
-            <label>
-              Email:
-              <input type="email" value={email} onChange={handleEmailChange} />
-            </label>
-            <button type="submit" disabled={email.trim() === ""}>
-              Submit
-            </button>
-          </form>
+        <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+          {/* progress */}
+          <div className="flex items-center px-24">
+            <ThemeProvider theme={quizTheme}>
+              <Stepper activeStep={activeStep} orientation="vertical">
+                {steps.map((step) => (
+                  <Step key={step.label}>
+                    <StepLabel>{step.label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            </ThemeProvider>
+          </div>
+
+          <div className="flex-1 bg-white mx-5 rounded-md">
+            <div className="px-52">
+              <h2 className="font-bold text-center py-4">
+                Want to save your result? We would gladly email it to you
+              </h2>
+              <form
+                onSubmit={(e) => {
+                  handleEmailSubmit(e);
+                  setActiveStep(3);
+                }}
+              >
+                <input
+                  className="ring-2 ring-emerald-500 rounded outline-none w-full h-7 p-3 py-4"
+                  placeholder="Email"
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+
+                <div className="flex justify-center py-10">
+                  <button
+                    className="block rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                    type="submit"
+                    disabled={email.trim() === ""}
+                  >
+                    Next
+                  </button>
+                </div>
+              </form>
+
+              <div className="flex justify-center items-end pb-5">
+                <p className="text-center text-xs">
+                  *By entering your email, you consent to receive marketing
+                  emails. For further informtation, please consult our Privacy
+                  Policy.
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
       );
     } else {
@@ -429,23 +544,59 @@ function Test() {
   
   // Display the current question and options
   return (
-    <div id="quiz-page" className="pb-8">
-      <Header />
-      <div className="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row rounded-lg bg-emerald-900 mt-8 sm:mx-20">
-        {/* progress */}
-        <div>Guidelines Test Result</div>
+    <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+      {/* progress */}
+      <div className="flex items-center px-24">
+        <ThemeProvider theme={quizTheme}>
+          <Stepper activeStep={activeStep} orientation="vertical">
+            {steps.map((step) => (
+              <Step key={step.label}>
+                <StepLabel>{step.label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </ThemeProvider>
+      </div>
 
-        {/* question */}
-        <div className="flex-1 bg-white m-5 rounded-md">
-          <div className="px-4 sm:px-20 md:px-40 lg:px-60 xl:px-80">
+      {/* question */}
+      <div className="flex-1 bg-white mx-5 rounded-md">
+        {/* show guidelines first */}
+        {guidelines ? (
+          <div className="px-52">
+            <h2 className="font-bold text-center py-4">
+              For more accurate result, please answer the questions as
+              truthfully as you can.
+            </h2>
+
+            <div className="flex justify-center">
+              <button
+                className="block rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                onClick={() => {
+                  setGuidelines(false);
+                  setActiveStep(1);
+                }}
+              >
+                Got it!
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="px-52">
+
             <h2 className="font-bold text-center py-4">{question}</h2>
             <ul>
               {options.map((option) => (
                 // wrap li in button
                 <button
-                  className="block w-full rounded-md bg-emerald-600 my-5 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                  className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
                   key={option}
-                  onClick={() => handleAnswer(option)}
+                  onClick={() => {
+                    handleAnswer(option);
+                    if (currentQuestion >= questions.length - 1) {
+                      setActiveStep(2);
+                    }
+                  }}
+
                 >
                   <li>{option}</li>
                 </button>
@@ -465,8 +616,7 @@ function Test() {
               </ThemeProvider>
             )}
           </div>
-          <div id="main-filler"></div>
-        </div>
+        )}
       </div>
     </div>
   );

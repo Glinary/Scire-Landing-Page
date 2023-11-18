@@ -1,17 +1,18 @@
 import React from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { ThemeProvider } from "@mui/material";
-import theme from "./theme";
+import { theme } from "./theme";
 
 // Header secton
 
 const Header = () => {
   return (
     <div className="flex flex-col items-center pt-20 pb-7">
-      <div id="header-whitespace" className="h-16"></div>
-      
-      <h1 className="text-6xl py-1" id="header">SkinGenius</h1>
-      <p className="text-2xl pb-1" id="header">
+      <h1 className="text-5xl py-1" id="header">
+        SkinGenius
+      </h1>
+      <p className="pb-1" id="header">
+
         The beginning of your skin care journey
       </p>
       

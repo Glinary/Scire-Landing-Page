@@ -11,4 +11,15 @@ const theme = createTheme({
   },
 });
 
-export default theme;
+const quizTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#db9c29",
+    },
+    text: {
+      primary: "#db9c29",
+    },
+  },
+});
+
+export { theme, quizTheme };
