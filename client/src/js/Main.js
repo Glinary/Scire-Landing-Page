@@ -142,12 +142,6 @@ async function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
   });
 }
 
-// Process a get request to /api/getAnswers and return the JSON result
-
-function getInitial() {
-  return 0
-}
-
 function Test() {
   // Declaration of variables
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -295,6 +289,19 @@ function Test() {
           skin_type = "Oily";
         }
       }
+
+      if (q4 === "A") {
+        acne_prone = "Acne Prone";
+      } else {
+        acne_prone = "Not Acne Prone";
+      }
+  
+      if (q5 === "A") {
+        sun_sensitive = "Sun Sensitive";
+      } else {
+        sun_sensitive = "Not Sun Sensitive";
+      }
+      
         storeResults(email, skin_type, acne_prone, sun_sensitive);
 
         setSkinType(skin_type);
