@@ -3,7 +3,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
 
-// Header secton
+// Header Section
 
 const Header = () => {
   return (
