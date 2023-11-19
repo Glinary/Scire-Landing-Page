@@ -6,7 +6,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "./Header";
-import axios from 'axios';
+import axios from "axios";
 
 // The main quiz section
 
@@ -85,11 +85,13 @@ function connectToDatabase() {
   //   });
 
   /// axios version
-  axios.post('/api/start', {
-    sessionId: "sampleSessionId"
-  }).then(function(response) {
-    console.log(response)
-  })
+  axios
+    .post("/api/start", {
+      sessionId: "sampleSessionId",
+    })
+    .then(function (response) {
+      console.log(response);
+    });
   /// axios version
 }
 
@@ -97,24 +99,28 @@ function storeResponse(currentQuestion, letter) {
   //console.log("I am at storeResponse()");
 
   // axios version
-  axios.post("/api/storeResponse", {
-    currentQuestion: currentQuestion,
-    letter: letter
-  }).then(function (response) {
-    console.log(response)
-  })
+  axios
+    .post("/api/storeResponse", {
+      currentQuestion: currentQuestion,
+      letter: letter,
+    })
+    .then(function (response) {
+      console.log(response);
+    });
   // axios version
 }
 
-async function storeEmail (email) {
+async function storeEmail(email) {
   //console.log("I am at storeEmail()");
 
   // axios version
-  axios.post("/api/storeEmail", {
-    email: email
-  }).then(function(response){
-    console.log(response)
-  })
+  axios
+    .post("/api/storeEmail", {
+      email: email,
+    })
+    .then(function (response) {
+      console.log(response);
+    });
 
   // axios version
 }
@@ -156,9 +162,6 @@ function Test() {
   const [sunSensitive, setSunSensitive] = useState(null);
   const [guidelines, setGuidelines] = useState(true);
 
-
-
-
   // When the start test button is clicked
   const handleStartTest = () => {
     //console.log("I am at handleStartTest()");
@@ -184,8 +187,7 @@ function Test() {
           </ThemeProvider>
         </div>
 
-        <div id="whitespace" className="h-40">
-        </div>
+        <div id="whitespace" className="h-40"></div>
       </div>
     );
   }
@@ -221,87 +223,89 @@ function Test() {
     setEmail(event.target.value);
   };
 
-    // Process the answers and return the final result
+  // Process the answers and return the final result
   const processAnswers = async () => {
     let skin_type, acne_prone, sun_sensitive;
-    
-    axios.get("/api/getAnswers").then(function(response) {
-      const q1 = response.data.option0
-      const q2 = response.data.option1
-      const q3 = response.data.option2
-      const q4 = response.data.option3
-      const q5 = response.data.option4
 
-      if (q1 === "A") {
-        if (q2 === "C" || q2 === "D") {
-          skin_type = "Dry";
-        } else if (q2 === "G") {
-         skin_type = "Normal";
-        } else if (q2 === "A" || q2 === "B" || q2 === "E") {
-          skin_type = "Combination";
-        } else if (q2 === "F") {
-          skin_type = "Sensitive";
-        }
-      } else if (q1 === "B") {
-        if (q2 === "B") {
-          if (q3 === "A") {
-            skin_type = "Oily";
-          } else {
+    axios
+      .get("/api/getAnswers")
+      .then(function (response) {
+        const q1 = response.data.option0;
+        const q2 = response.data.option1;
+        const q3 = response.data.option2;
+        const q4 = response.data.option3;
+        const q5 = response.data.option4;
+
+        if (q1 === "A") {
+          if (q2 === "C" || q2 === "D") {
+            skin_type = "Dry";
+          } else if (q2 === "G") {
+            skin_type = "Normal";
+          } else if (q2 === "A" || q2 === "B" || q2 === "E") {
+            skin_type = "Combination";
+          } else if (q2 === "F") {
+            skin_type = "Sensitive";
+          }
+        } else if (q1 === "B") {
+          if (q2 === "B") {
+            if (q3 === "A") {
+              skin_type = "Oily";
+            } else {
+              skin_type = "Normal";
+            }
+          } else if (q2 === "C" || q2 === "D") {
+            if (q3 === "B") {
+              skin_type = "Combination";
+            } else {
+              skin_type = "Dry";
+            }
+          } else if (q2 === "A" || q2 === "E") {
+            skin_type = "Combination";
+          } else if (q2 === "F") {
+            skin_type = "Sensitive";
+          } else if (q2 === "G") {
             skin_type = "Normal";
           }
-        } else if (q2 === "C" || q2 === "D") {
-          if (q3 === "B") {
-            skin_type = "Combination";
-          } else {
-            skin_type = "Dry";
-          }
-        } else if (q2 === "A" || q2 === "E") {
-          skin_type = "Combination";
-        } else if (q2 === "F") {
-          skin_type = "Sensitive";
-        } else if (q2 === "G") {
-          skin_type = "Normal";
-        }
-      } else if (q1 === "C") {
-        if (q2 === "F") {
-          skin_type = "Sensitive";
-            } else if (q2 === "B") {
-          if (q3 === "A" || q3 === "B") {
-            skin_type = "Oily";
-          } else if (q3 === "C" || q3 === "D") {
-            skin_type = "Combination";
-          }
-        } else {
-          skin_type = "Combination";
-        }
-      } else if (q1 === "D") {
-        if (q2 === "F") {
-          skin_type = "Sensitive";
-        } else if (q2 === "A" || q2 === "E") {
-          skin_type = "Combination";
-        } else if (q2 === "G") {
-          if (q3 === "A" || q3 === "B") {
-            skin_type = "Oily";
+        } else if (q1 === "C") {
+          if (q2 === "F") {
+            skin_type = "Sensitive";
+          } else if (q2 === "B") {
+            if (q3 === "A" || q3 === "B") {
+              skin_type = "Oily";
+            } else if (q3 === "C" || q3 === "D") {
+              skin_type = "Combination";
+            }
           } else {
             skin_type = "Combination";
           }
-        } else {
-          skin_type = "Oily";
+        } else if (q1 === "D") {
+          if (q2 === "F") {
+            skin_type = "Sensitive";
+          } else if (q2 === "A" || q2 === "E") {
+            skin_type = "Combination";
+          } else if (q2 === "G") {
+            if (q3 === "A" || q3 === "B") {
+              skin_type = "Oily";
+            } else {
+              skin_type = "Combination";
+            }
+          } else {
+            skin_type = "Oily";
+          }
         }
-      }
 
-      if (q4 === "A") {
-        acne_prone = "Acne Prone";
-      } else {
-        acne_prone = "Not Acne Prone";
-      }
-  
-      if (q5 === "A") {
-        sun_sensitive = "Sun Sensitive";
-      } else {
-        sun_sensitive = "Not Sun Sensitive";
-      }
-      
+        if (q4 === "A") {
+          acne_prone = "Acne Prone";
+        } else {
+          acne_prone = "Not Acne Prone";
+        }
+
+        if (q5 === "A") {
+          sun_sensitive = "Sun Sensitive";
+        } else {
+          sun_sensitive = "Not Sun Sensitive";
+        }
+
         storeResults(email, skin_type, acne_prone, sun_sensitive);
 
         setSkinType(skin_type);
@@ -313,9 +317,129 @@ function Test() {
       .catch((error) => {
         console.error("An error occurred:", error);
       });
+  };
 
-    // Return results if email has been submitted
-    return (
+  // When all questions have been asked
+  if (currentQuestion >= questions.length) {
+    if (!emailSubmitted) {
+      return (
+        <div>
+          <Header />
+          <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+            {/* progress */}
+            <div className="flex items-center px-24">
+              <ThemeProvider theme={quizTheme}>
+                <Stepper activeStep={activeStep} orientation="vertical">
+                  {steps.map((step) => (
+                    <Step key={step.label}>
+                      <StepLabel>{step.label}</StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+              </ThemeProvider>
+            </div>
+
+            <div className="flex-1 bg-white mx-5 rounded-md">
+              <div className="px-52">
+                <h2 className="font-bold text-center py-4">
+                  Want to save your result? We would gladly email it to you
+                </h2>
+                <form
+                  onSubmit={(e) => {
+                    handleEmailSubmit(e);
+                    setActiveStep(3);
+                  }}
+                >
+                  <input
+                    className="ring-2 ring-emerald-500 rounded outline-none w-full h-7 p-3 py-4"
+                    placeholder="Email"
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
+
+                  <div className="flex justify-center py-10">
+                    <button
+                      className="block rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                      type="submit"
+                      disabled={email.trim() === ""}
+                    >
+                      Next
+                    </button>
+                  </div>
+                </form>
+
+                <div className="flex justify-center items-end pb-5">
+                  <p className="text-center text-xs">
+                    *By entering your email, you consent to receive marketing
+                    emails. For further informtation, please consult our Privacy
+                    Policy.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div id="results">
+          <Header />
+          <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+            {/* progress */}
+            <div className="flex items-center px-24">
+              <ThemeProvider theme={quizTheme}>
+                <Stepper activeStep={activeStep} orientation="vertical">
+                  {steps.map((step) => (
+                    <Step key={step.label}>
+                      <StepLabel>{step.label}</StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+              </ThemeProvider>
+            </div>
+
+            <div className="flex-1 bg-white mx-5 rounded-md">
+              <div className="px-52 py-5">
+                <h2 className="font-bold text-center">
+                  Here's your diagnosis:
+                </h2>
+
+                <div className="flex flex-row mx-16 py-2 justify-center">
+                  <p className="py-1">Skin Type:</p>
+                  <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                    {skinType}
+                  </h2>
+                </div>
+
+                <div className="flex flex-row mx-16 py-2 justify-center">
+                  <p className="py-1">Acne Prone:</p>
+                  <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                    {acneProne}
+                  </h2>
+                </div>
+
+                <div className="flex flex-row mx-16 py-2 justify-center">
+                  <p className="py-1">Sun-sensitive:</p>
+                  <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                    {sunSensitive}
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  // Render the current question and options
+  const { question, options } = questions[currentQuestion];
+
+  // Display the current question and options
+  return (
+    <div>
+      <Header />
       <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
         {/* progress */}
         <div className="flex items-center px-24">
@@ -330,203 +454,66 @@ function Test() {
           </ThemeProvider>
         </div>
 
+        {/* question */}
         <div className="flex-1 bg-white mx-5 rounded-md">
-          <div className="px-52 py-5">
-            <h2 className="font-bold text-center">Here's your diagnosis:</h2>
-
-            <div className="flex flex-row mx-16 py-2 justify-center">
-              <p className="py-1">Skin Type:</p>
-              <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
-                {skinType}
-              </h2>
-            </div>
-
-            <div className="flex flex-row mx-16 py-2 justify-center">
-              <p className="py-1">Acne Prone:</p>
-              <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
-                {acneProne}
-              </h2>
-            </div>
-
-            <div className="flex flex-row mx-16 py-2 justify-center">
-              <p className="py-1">Sun-sensitive:</p>
-              <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
-                {sunSensitive}
-              </h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-
-  };
-
-  // When all questions have been asked
-  if (currentQuestion >= questions.length) {
-    if (!emailSubmitted) {
-      return (
-        <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
-          {/* progress */}
-          <div className="flex items-center px-24">
-            <ThemeProvider theme={quizTheme}>
-              <Stepper activeStep={activeStep} orientation="vertical">
-                {steps.map((step) => (
-                  <Step key={step.label}>
-                    <StepLabel>{step.label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-            </ThemeProvider>
-          </div>
-
-          <div className="flex-1 bg-white mx-5 rounded-md">
+          {/* show guidelines first */}
+          {guidelines ? (
             <div className="px-52">
               <h2 className="font-bold text-center py-4">
-                Want to save your result? We would gladly email it to you
+                For more accurate result, please answer the questions as
+                truthfully as you can.
               </h2>
-              <form
-                onSubmit={(e) => {
-                  handleEmailSubmit(e);
-                  setActiveStep(3);
-                }}
-              >
-                <input
-                  className="ring-2 ring-emerald-500 rounded outline-none w-full h-7 p-3 py-4"
-                  placeholder="Email"
-                  type="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
 
-                <div className="flex justify-center py-10">
-                  <button
-                    className="block rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
-                    type="submit"
-                    disabled={email.trim() === ""}
-                  >
-                    Next
-                  </button>
-                </div>
-              </form>
-
-              <div className="flex justify-center items-end pb-5">
-                <p className="text-center text-xs">
-                  *By entering your email, you consent to receive marketing
-                  emails. For further informtation, please consult our Privacy
-                  Policy.
-                </p>
+              <div className="flex justify-center">
+                <button
+                  className="block rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                  onClick={() => {
+                    setGuidelines(false);
+                    setActiveStep(1);
+                  }}
+                >
+                  Got it!
+                </button>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="px-52">
+              <h2 className="font-bold text-center py-4">{question}</h2>
+              <ul>
+                {options.map((option) => (
+                  // wrap li in button
+                  <button
+                    className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                    key={option}
+                    onClick={() => {
+                      handleAnswer(option);
+                      if (currentQuestion >= questions.length - 1) {
+                        setActiveStep(2);
+                      }
+                    }}
+                  >
+                    <li>{option}</li>
+                  </button>
+                ))}
+              </ul>
 
+              {currentQuestion > 0 && (
+                <ThemeProvider theme={theme}>
+                  <div className="flex justify-center">
+                    <Button
+                      variant="text"
+                      className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
+                      onClick={handleBack}
+                      startIcon={<ArrowBackIcon />}
+                    >
+                      Back
+                    </Button>
+                  </div>
+                </ThemeProvider>
+              )}
+            </div>
+          )}
         </div>
-      );
-    } else {
-      return <div>{
-          // Return results if email has been submitted
-          (
-            
-            <div id='results'>
-              <Header />
-              <p>
-                Thank you for answering the questions!
-                <br />
-                Here's your assessment:
-                <br />
-                Skin Type: {skinType}
-                <br />
-                Acne Prone: {acneProne}
-                <br />
-                Sun-Sensitive: {sunSensitive}
-                <br />
-                If you have any more questions or need further assistance, feel free
-                to ask!
-                <br />
-              </p>
-            </div>
-          )
-        }</div>;
-    }
-  }
-
-  // Render the current question and options
-  const { question, options } = questions[currentQuestion];
-  
-  // Display the current question and options
-  return (
-    <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
-      {/* progress */}
-      <div className="flex items-center px-24">
-        <ThemeProvider theme={quizTheme}>
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((step) => (
-              <Step key={step.label}>
-                <StepLabel>{step.label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-        </ThemeProvider>
-      </div>
-
-      {/* question */}
-      <div className="flex-1 bg-white mx-5 rounded-md">
-        {/* show guidelines first */}
-        {guidelines ? (
-          <div className="px-52">
-            <h2 className="font-bold text-center py-4">
-              For more accurate result, please answer the questions as
-              truthfully as you can.
-            </h2>
-
-            <div className="flex justify-center">
-              <button
-                className="block rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
-                onClick={() => {
-                  setGuidelines(false);
-                  setActiveStep(1);
-                }}
-              >
-                Got it!
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="px-52">
-
-            <h2 className="font-bold text-center py-4">{question}</h2>
-            <ul>
-              {options.map((option) => (
-                // wrap li in button
-                <button
-                  className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
-                  key={option}
-                  onClick={() => {
-                    handleAnswer(option);
-                    if (currentQuestion >= questions.length - 1) {
-                      setActiveStep(2);
-                    }
-                  }}
-
-                >
-                  <li>{option}</li>
-                </button>
-              ))}
-            </ul>
-
-            {currentQuestion > 0 && (
-              <ThemeProvider theme={theme}>
-                <Button
-                  variant="text"
-                  className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
-                  onClick={handleBack}
-                  startIcon={<ArrowBackIcon />}
-                >
-                  Back
-                </Button>
-              </ThemeProvider>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );
