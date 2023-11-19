@@ -1,5 +1,5 @@
 import { Button, ThemeProvider } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { theme, quizTheme } from "./theme";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -161,6 +161,26 @@ function Test() {
   const [acneProne, setAcneProne] = useState(null);
   const [sunSensitive, setSunSensitive] = useState(null);
   const [guidelines, setGuidelines] = useState(true);
+  
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    // Check screen width on mount and on resize
+    console.log(window.innerHeight)
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 1024); // Set the desired breakpoint
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Check initial size on mount
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   // When the start test button is clicked
   const handleStartTest = () => {
@@ -325,11 +345,11 @@ function Test() {
       return (
         <div>
           <Header />
-          <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
-            {/* progress */}
-            <div className="flex items-center px-24">
+          <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+          {/* progress */}
+          <div className="flex items-center justify-center pt-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
-                <Stepper activeStep={activeStep} orientation="vertical">
+                <Stepper activeStep={activeStep} orientation={isSmallScreen ? 'horizontal' : 'vertical'}>
                   {steps.map((step) => (
                     <Step key={step.label}>
                       <StepLabel>{step.label}</StepLabel>
@@ -338,10 +358,10 @@ function Test() {
                 </Stepper>
               </ThemeProvider>
             </div>
-
-            <div className="flex-1 bg-white mx-5 rounded-md">
-              <div className="px-52">
-                <h2 className="font-bold text-center py-4">
+            
+            <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
+              <div className="lg:px-52">
+              <h2 className="text-sm pt-10 lg:pt-10 px-3 lg:text-md font-bold text-center lg:py-4">
                   Want to save your result? We would gladly email it to you
                 </h2>
                 <form
@@ -350,17 +370,19 @@ function Test() {
                     setActiveStep(3);
                   }}
                 >
+                  <div className="flex justify-center">
                   <input
-                    className="ring-2 ring-emerald-500 rounded outline-none w-full h-7 p-3 py-4"
+                    className="ring-2 ring-emerald-500 rounded outline-none w-3/4 lg:w-full h-7 p-3 py-4 mt-5 lg:mt-0 mx-auto"
                     placeholder="Email"
                     type="email"
                     value={email}
                     onChange={handleEmailChange}
                   />
+                  </div>
 
-                  <div className="flex justify-center py-10">
+                  <div className="flex justify-center lg:py-10">
                     <button
-                      className="block rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                      className="block rounded-md bg-emerald-600 my-5 lg:my-0 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
                       type="submit"
                       disabled={email.trim() === ""}
                     >
@@ -385,11 +407,11 @@ function Test() {
       return (
         <div id="results">
           <Header />
-          <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+          <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
             {/* progress */}
-            <div className="flex items-center px-24">
+            <div className="flex items-center justify-center pt-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
-                <Stepper activeStep={activeStep} orientation="vertical">
+                <Stepper activeStep={activeStep} orientation={isSmallScreen ? 'horizontal' : 'vertical'}>
                   {steps.map((step) => (
                     <Step key={step.label}>
                       <StepLabel>{step.label}</StepLabel>
@@ -398,30 +420,29 @@ function Test() {
                 </Stepper>
               </ThemeProvider>
             </div>
-
-            <div className="flex-1 bg-white mx-5 rounded-md">
-              <div className="px-52 py-5">
-                <h2 className="font-bold text-center">
+            <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
+              <div className="xl:px-52 lg:py-5">
+              <h2 className="text-sm pt-5 px-3 lg:text-xl font-bold text-center lg:py-4">
                   Here's your diagnosis:
                 </h2>
 
-                <div className="flex flex-row mx-16 py-2 justify-center">
+                <div className="flex flex-row py-2 justify-center">
                   <p className="py-1">Skin Type:</p>
-                  <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                  <h2 className="lg:font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
                     {skinType}
                   </h2>
                 </div>
 
-                <div className="flex flex-row mx-16 py-2 justify-center">
+                <div className="flex flex-row py-2 justify-center">
                   <p className="py-1">Acne Prone:</p>
-                  <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                  <h2 className="lg:font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
                     {acneProne}
                   </h2>
                 </div>
 
-                <div className="flex flex-row mx-16 py-2 justify-center">
+                <div className="flex flex-row py-2 justify-center">
                   <p className="py-1">Sun-sensitive:</p>
-                  <h2 className="font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
+                  <h2 className="lg:font-semibold text-white rounded-full bg-emerald-600 px-3 py-1 ml-3">
                     {sunSensitive}
                   </h2>
                 </div>
@@ -436,15 +457,16 @@ function Test() {
   // Render the current question and options
   const { question, options } = questions[currentQuestion];
 
+
   // Display the current question and options
   return (
     <div>
       <Header />
-      <div className="flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+      <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
         {/* progress */}
-        <div className="flex items-center px-24">
+        <div className="flex items-center justify-center pt-3 lg:px-24">
           <ThemeProvider theme={quizTheme}>
-            <Stepper activeStep={activeStep} orientation="vertical">
+            <Stepper activeStep={activeStep} orientation={isSmallScreen ? 'horizontal' : 'vertical'}>
               {steps.map((step) => (
                 <Step key={step.label}>
                   <StepLabel>{step.label}</StepLabel>
@@ -455,12 +477,12 @@ function Test() {
         </div>
 
         {/* question */}
-        <div className="flex-1 bg-white mx-5 rounded-md">
+        <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
           {/* show guidelines first */}
           {guidelines ? (
-            <div className="px-52">
-              <h2 className="font-bold text-center py-4">
-                For more accurate result, please answer the questions as
+            <div className="lg:px-52">
+              <h2 className="text-sm pt-5 px-3 lg:text-md font-bold text-center lg:py-4">
+                For more accurate results, please answer the questions as
                 truthfully as you can.
               </h2>
 
@@ -477,13 +499,14 @@ function Test() {
               </div>
             </div>
           ) : (
-            <div className="px-52">
-              <h2 className="font-bold text-center py-4">{question}</h2>
-              <ul>
+            <div className="xl:px-52 lg:px-32">
+              <h2 className="text-sm pt-5 px-3 lg:text-md font-bold text-center lg:py-4">{question}</h2>
+
+              <ul className="pb-4 lg:pb-0">
                 {options.map((option) => (
                   // wrap li in button
                   <button
-                    className="block w-full rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                    className="mx-auto block text-sm lg:text-md w-3/4 lg:w-full lg:rounded-md rounded-3xl bg-emerald-600 my-5 px-5 lg:px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
                     key={option}
                     onClick={() => {
                       handleAnswer(option);
