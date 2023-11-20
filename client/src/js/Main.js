@@ -386,7 +386,7 @@ function Test() {
 
                   <div className="flex justify-center lg:py-10">
                     <button
-                      className="block rounded-md bg-emerald-600 my-5 lg:my-0 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                      className="block rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
                       type="submit"
                       disabled={email.trim() === ""}
                     >
