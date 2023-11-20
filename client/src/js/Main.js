@@ -342,9 +342,9 @@ function Test() {
   if (currentQuestion >= questions.length) {
     if (!emailSubmitted) {
       return (
-        <div>
+        <div id="results" className="pb-8">
           <Header />
-          <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+          <div className="block lg:flex rounded-lg bg-emerald-900 mx-20 p-5">
             {/* progress */}
             <div className="flex items-center justify-center pt-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
@@ -409,9 +409,9 @@ function Test() {
       );
     } else {
       return (
-        <div id="results">
+        <div id="results" className="pb-8">
           <Header />
-          <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+          <div className="block lg:flex rounded-lg bg-emerald-900 mx-20 p-5">
             {/* progress */}
             <div className="flex items-center justify-center pt-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
@@ -479,9 +479,9 @@ function Test() {
 
   // Display the current question and options
   return (
-    <div>
+    <div id="quiz-page" className="pb-8">
       <Header />
-      <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+      <div className="block lg:flex rounded-lg bg-emerald-900 mx-20 p-5">
         {/* progress */}
         <div className="flex items-center justify-center pt-3 lg:px-24">
           <ThemeProvider theme={quizTheme}>
