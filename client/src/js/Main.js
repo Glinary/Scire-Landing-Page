@@ -161,26 +161,25 @@ function Test() {
   const [acneProne, setAcneProne] = useState(null);
   const [sunSensitive, setSunSensitive] = useState(null);
   const [guidelines, setGuidelines] = useState(true);
-  
+
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     // Check screen width on mount and on resize
-    console.log(window.innerHeight)
+    console.log(window.innerHeight);
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 1024); // Set the desired breakpoint
     };
 
     // Add event listener for window resize
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize(); // Check initial size on mount
 
     // Cleanup the event listener on component unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
-
 
   // When the start test button is clicked
   const handleStartTest = () => {
@@ -346,10 +345,15 @@ function Test() {
         <div>
           <Header />
           <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
-          {/* progress */}
-          <div className="flex items-center justify-center pt-3 lg:px-24">
+            {/* progress */}
+            <div className="flex items-center justify-center pt-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
-                <Stepper activeStep={activeStep} orientation={isSmallScreen ? 'horizontal' : 'vertical'}>
+                <Stepper
+                  className="w-full"
+                  activeStep={activeStep}
+                  orientation={isSmallScreen ? "horizontal" : "vertical"}
+                  {...(isSmallScreen ? { alternativeLabel: true } : {})}
+                >
                   {steps.map((step) => (
                     <Step key={step.label}>
                       <StepLabel>{step.label}</StepLabel>
@@ -358,10 +362,10 @@ function Test() {
                 </Stepper>
               </ThemeProvider>
             </div>
-            
+
             <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
               <div className="lg:px-52">
-              <h2 className="text-sm pt-10 lg:pt-10 px-3 lg:text-md font-bold text-center lg:py-4">
+                <h2 className="text-sm pt-10 lg:pt-10 px-3 lg:text-md font-bold text-center lg:py-4">
                   Want to save your result? We would gladly email it to you
                 </h2>
                 <form
@@ -371,13 +375,13 @@ function Test() {
                   }}
                 >
                   <div className="flex justify-center">
-                  <input
-                    className="ring-2 ring-emerald-500 rounded outline-none w-3/4 lg:w-full h-7 p-3 py-4 mt-5 lg:mt-0 mx-auto"
-                    placeholder="Email"
-                    type="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                  />
+                    <input
+                      className="ring-2 ring-emerald-500 rounded outline-none w-3/4 lg:w-full h-7 p-3 py-4 mt-5 lg:mt-0 mx-auto"
+                      placeholder="Email"
+                      type="email"
+                      value={email}
+                      onChange={handleEmailChange}
+                    />
                   </div>
 
                   <div className="flex justify-center lg:py-10">
@@ -411,7 +415,12 @@ function Test() {
             {/* progress */}
             <div className="flex items-center justify-center pt-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
-                <Stepper activeStep={activeStep} orientation={isSmallScreen ? 'horizontal' : 'vertical'}>
+                <Stepper
+                  className="w-full"
+                  activeStep={activeStep}
+                  orientation={isSmallScreen ? "horizontal" : "vertical"}
+                  {...(isSmallScreen ? { alternativeLabel: true } : {})}
+                >
                   {steps.map((step) => (
                     <Step key={step.label}>
                       <StepLabel>{step.label}</StepLabel>
@@ -420,9 +429,10 @@ function Test() {
                 </Stepper>
               </ThemeProvider>
             </div>
+
             <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
-              <div className="xl:px-52 lg:py-5">
-              <h2 className="text-sm pt-5 px-3 lg:text-xl font-bold text-center lg:py-4">
+              <div className="mx-5 xl:px-20 lg:py-5">
+                <h2 className="text-sm pt-5 px-3 lg:text-xl font-bold text-center lg:py-4">
                   Here's your diagnosis:
                 </h2>
 
@@ -446,6 +456,16 @@ function Test() {
                     {sunSensitive}
                   </h2>
                 </div>
+
+                <div className="flex w-full ring-1 ring-emerald-800 rounded-md p-2 my-8">
+                  <p>Skin type desc lorem ipsum dolor</p>
+                </div>
+
+                <div className="flex justify-center">
+                  <button className="block rounded-2xl bg-emerald-600 my-5 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700">
+                    I want to see featured products
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -457,7 +477,6 @@ function Test() {
   // Render the current question and options
   const { question, options } = questions[currentQuestion];
 
-
   // Display the current question and options
   return (
     <div>
@@ -466,7 +485,12 @@ function Test() {
         {/* progress */}
         <div className="flex items-center justify-center pt-3 lg:px-24">
           <ThemeProvider theme={quizTheme}>
-            <Stepper activeStep={activeStep} orientation={isSmallScreen ? 'horizontal' : 'vertical'}>
+            <Stepper
+              className="w-full"
+              activeStep={activeStep}
+              orientation={isSmallScreen ? "horizontal" : "vertical"}
+              {...(isSmallScreen ? { alternativeLabel: true } : {})}
+            >
               {steps.map((step) => (
                 <Step key={step.label}>
                   <StepLabel>{step.label}</StepLabel>
@@ -500,7 +524,9 @@ function Test() {
             </div>
           ) : (
             <div className="xl:px-52 lg:px-32">
-              <h2 className="text-sm pt-5 px-3 lg:text-md font-bold text-center lg:py-4">{question}</h2>
+              <h2 className="text-sm pt-5 px-3 lg:text-md font-bold text-center lg:py-4">
+                {question}
+              </h2>
 
               <ul className="pb-4 lg:pb-0">
                 {options.map((option) => (
