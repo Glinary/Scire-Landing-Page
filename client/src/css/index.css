@@ -41,9 +41,9 @@ p {
 }
 
 #landing-page {
-  background-image: url('assets/orange flower rotate_18.png'), url('assets/model.png'), url('assets/scire logo.png'), url('assets/purple flower rotate_15.png');
+  background-image: url('assets/orange flower rotate_18.png'), url('assets/smilemodel.png'), url('assets/scire logo.png'), url('assets/purple flower rotate_15.png');
   background-position: 0% 100%, 100% 100%, 5% 2%, 100% 0%;
-  background-size: 25%, 25%, 17%, 17%;
+  background-size: 22%, 22%, 17%, 17%;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
 }
 
