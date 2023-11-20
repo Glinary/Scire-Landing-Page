@@ -11,11 +11,11 @@ const Header = () => {
       <div id="header-whitespace" className="h-16"></div>
       
       <h1 className="text-center text-6xl py-1 md:py-0.5 max-[700px]:text-5xl" id="header">SkinGenius</h1>
-      <p className="text-center text-2xl min-[700px]:pb-2 max-[700px]:text-base max-[700px]:pb-5" id="header">
+      <p className="text-center text-2xl max-[700px]:text-base pb-5" id="header">
         The beginning of your skin care journey
       </p>
       
-      <p className="text-xl text-center pt-5 min-[700px]:text-lg max-[700px]:text-xs max-[700px]:px-10">
+      <p className="text-xl text-center pt-5 min-[700px]:text-xl max-[700px]:text-xs max-[700px]:px-10">
         Scire Essentials presents you a test to check your skin type and become{" "}
         <span className="hidden md:inline"><br/></span>
         aware which products and routine suits your skin better.
