@@ -10,8 +10,8 @@ const Header = () => {
     <div className="flex flex-col items-center pt-20 pb-7 2xl:pt-28 min-[300px]:pt-48 max-[700px]:pb-10">
       <div id="header-whitespace" className="h-16 md:h-12"></div>
       
-      <h1 className="text-center text-6xl py-1 md:py-0.5 min-[300px]:text-5xl" id="header">SkinGenius</h1>
-      <p className="text-center text-2xl min-[700px]:text-1xl min-[700px]:pb-2 max-[700px]:text-base max-[700px]:pb-5" id="header">
+      <h1 className="text-center text-6xl py-1 md:py-0.5 max-[700px]:text-5xl" id="header">SkinGenius</h1>
+      <p className="text-center text-2xl min-[700px]:pb-2 max-[700px]:text-base max-[700px]:pb-5" id="header">
         The beginning of your skin care journey
       </p>
       
@@ -22,7 +22,7 @@ const Header = () => {
       </p>
 
       <div className="flex flex-row items-center justify-center">
-        <p className="text-center text-xl min-[700px]:text-lg min-[700px]:py-4 max-[700px]:text-xs py-6 pr-2">
+        <p className="text-center text-xl max-[700px]:text-xs py-6 pr-2">
           You may also try our Messenger chatbot here:
         </p>
 
