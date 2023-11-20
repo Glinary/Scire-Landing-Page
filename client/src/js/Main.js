@@ -168,7 +168,7 @@ function Test() {
     // Check screen width on mount and on resize
     console.log(window.innerHeight);
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 1024); // Set the desired breakpoint
+      setIsSmallScreen(window.innerWidth <= 1023); // Set the desired breakpoint
     };
 
     // Add event listener for window resize
@@ -344,7 +344,7 @@ function Test() {
       return (
         <div>
           <Header />
-          <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+          <div className="m-4 sm:m-12 md:m-14 lg:m-18 block lg:flex rounded-lg bg-emerald-900 p-5">
             {/* progress */}
             <div className="flex items-center justify-center pt-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
@@ -386,7 +386,7 @@ function Test() {
 
                   <div className="flex justify-center lg:py-10">
                     <button
-                      className="block rounded-md bg-emerald-600 my-5 lg:my-0 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                      className="block rounded-md bg-emerald-600 my-5 px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
                       type="submit"
                       disabled={email.trim() === ""}
                     >
@@ -411,7 +411,7 @@ function Test() {
       return (
         <div id="results">
           <Header />
-          <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+          <div className="m-4 sm:m-12 md:m-14 lg:m-18 block lg:flex rounded-lg bg-emerald-900 p-5">
             {/* progress */}
             <div className="flex items-center justify-center pt-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
@@ -481,7 +481,7 @@ function Test() {
   return (
     <div>
       <Header />
-      <div className="block lg:flex rounded-lg bg-emerald-900 m-8 mx-20 p-5">
+      <div className="m-4 sm:m-12 md:m-14 lg:m-18 block lg:flex rounded-lg bg-emerald-900 p-5">
         {/* progress */}
         <div className="flex items-center justify-center pt-3 lg:px-24">
           <ThemeProvider theme={quizTheme}>
@@ -504,7 +504,7 @@ function Test() {
         <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
           {/* show guidelines first */}
           {guidelines ? (
-            <div className="lg:px-52">
+            <div className="lg:px-5 md:px-4">
               <h2 className="text-sm pt-5 px-3 lg:text-md font-bold text-center lg:py-4">
                 For more accurate results, please answer the questions as
                 truthfully as you can.
