@@ -7,8 +7,8 @@ import { theme } from "./theme";
 
 const Header = () => {
   return (
-    <div className="flex flex-col items-center pt-20 pb-7 2xl:pt-28 min-[300px]:pt-48 max-[700px]:pb-10">
-      <div id="header-whitespace" className="h-16 md:h-12"></div>
+    <div className="flex flex-col items-center min-[700px]:pt-20 2xl:pt-28 min-[300px]:pt-48 max-[700px]:pb-3 pb-5">
+      <div id="header-whitespace" className="h-16"></div>
       
       <h1 className="text-center text-6xl py-1 md:py-0.5 max-[700px]:text-5xl" id="header">SkinGenius</h1>
       <p className="text-center text-2xl min-[700px]:pb-2 max-[700px]:text-base max-[700px]:pb-5" id="header">
