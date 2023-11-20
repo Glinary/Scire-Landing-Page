@@ -13,7 +13,6 @@ function App() {
     <div className="bg-[#FDFAF3]">
       <Main />
       <About />
-      <FeaturedProducts />
     </div>
   );
 }
