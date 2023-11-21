@@ -15,7 +15,7 @@ const Header = () => {
         The beginning of your skin care journey
       </p>
       
-      <p className="text-xl text-center pt-5 min-[700px]:text-xl max-[700px]:text-xs max-[700px]:px-10">
+      <p className="text-xl text-center pt-5 min-[700px]:text-xl max-[700px]:text-xs max-[700px]:px-10 min-[700px]:px-6">
         Scire Essentials presents you a test to check your skin type and become{" "}
         <span className="hidden md:inline"><br/></span>
         aware which products and routine suits your skin better.
