@@ -8,12 +8,13 @@ function About() {
     <div id="about-container">
     <div className="p-14" id="about">
       <h1 className="text-3xl font-bold py-2 pb-7 text-center opacity-100" id="about-title">About the Test</h1>
-      <p className="text-center text-xs min-[1000px]:text-sm min-[700px]:px-12 min-[1440px]:px-32 lg:pb-2 font-bold" id="about-desc">
-      SkinGenius is an advanced skin assessment tool distinguished by its meticulous design and thorough professional review carried out by a
-      doctor affiliated with Scire Essentials. The diagnostic test delves deep into the subtleties of your skin type, offering an accurate and
-      personalized skincare profile. The blend of expert programming and rigorous evaluation ensures that the results are both precise and
-      reliable, allowing you to embark on a skincare journey that is tailor-made for your unique skin needs.
-      </p>
+        <p className="text-center text-xs min-[1000px]:text-sm min-[700px]:px-12 min-[1440px]:px-32 lg:pb-2 font-bold" id="about-desc">
+          SkinGenius is a skincare consultant distinguished by its thorough professional review by a dermatologist affiliated with Scire Essentials. 
+          This test helps you determine your skin type, provides general information about it, and offers a skincare profile. The blend of expert 
+          programming and rigorous evaluation ensures that the results are both precise and reliable, allowing you to embark on a skincare journey 
+          that is tailor-made for your unique skin needs. The test algorithm will then suggest nearby dermatologists to ensure continuity of care 
+          and provide expert guidance.
+        </p>
     </div>
     </div>
   );
