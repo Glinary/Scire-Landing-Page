@@ -470,13 +470,13 @@ app.get("/api/getAnswers", (req, res) => {
     option4,
   };
 
-  console.log("I am at get /api/getAnswers");
+  //console.log("I am at get /api/getAnswers");
   res.json(responseData);
 });
 
 // get the test results of the user after the quiz
 app.get("/api/getTestResults", (req, res) => {
-  console.log("I am at getTestResults")
+  //console.log("I am at getTestResults")
   let skin_type = req.session.skin_type;
   let acne_prone = req.session.acne_prone;
   let sun_sensitive = req.session.sun_sensitive;
@@ -487,7 +487,7 @@ app.get("/api/getTestResults", (req, res) => {
     sun_sensitive,
   };
 
-  console.log("I am at get /api/getTestResults");
+  //console.log("I am at get /api/getTestResults");
   res.json(responseData);
 });
 
@@ -495,7 +495,7 @@ app.get("/api/getTestResults", (req, res) => {
 app.post("/api/start", (req, res) => {
   let { sessionId } = req.body;
 
-  console.log("sessionId: " + req.sessionID);
+  //console.log("sessionId: " + req.sessionID);
   res.json({ message: "Session successfully connected" });
 });
 
@@ -505,27 +505,27 @@ app.post("/api/storeResponse", (req, res) => {
   switch (currentQuestion) {
     case 0:
       req.session.option0 = letter;
-      console.log("I stored " + req.session.option0 + " to option0");
+      //console.log("I stored " + req.session.option0 + " to option0");
       break;
     case 1:
       req.session.option1 = letter;
-      console.log("I stored " + req.session.option1 + " to option1");
+      //console.log("I stored " + req.session.option1 + " to option1");
       break;
     case 2:
       req.session.option2 = letter;
-      console.log("I stored " + req.session.option2 + " to option2");
+      //console.log("I stored " + req.session.option2 + " to option2");
       break;
     case 3:
       req.session.option3 = letter;
-      console.log("I stored " + req.session.option3 + " to option3");
+      //console.log("I stored " + req.session.option3 + " to option3");
       break;
     case 4:
       req.session.option4 = letter;
-      console.log("I stored " + req.session.option4 + " to option4");
+      //console.log("I stored " + req.session.option4 + " to option4");
       break;
   }
   req.session.save();
-  console.log("Real sessionId: " + req.sessionID);
+  //console.log("Real sessionId: " + req.sessionID);
 
   res.json({ message: "storeResponse()" });
 });
@@ -539,17 +539,17 @@ app.post("/api/storeResults", (req, res) => {
   req.session.sun_sensitive = sun_sensitive;
   req.session.save();
 
-  console.log("Results stored successfully to session:", req.sessionID);
+  //console.log("Results stored successfully to session:", req.sessionID);
   res.json({ message: "storeResults()" });
 });
 
 // stores the email of the user in the google sheets
 //TODO: post /api/storeEmail will not read in the future if user presses back at least once
 app.post("/api/storeEmail", (req, res) => {
-  console.log("I am at the store Email post request");
+  //console.log("I am at the store Email post request");
   let { email } = req.body;
-  console.log("Real sessionId: " + req.sessionID);
-  console.log("email: " + email);
+  //console.log("Real sessionId: " + req.sessionID);
+  //console.log("email: " + email);
   res.json({ message: "storeEmail()" });
   storeEmail(email).catch(console.dir);
 });
@@ -558,9 +558,9 @@ app.post("/api/storeEmail", (req, res) => {
 app.post("/api/sendEmail", (req, res) => {
   let { email, skin_type, acne_prone, sun_sensitive } = req.body;
 
-  console.log("/api/sendEmail got", skin_type, acne_prone, sun_sensitive);
+  //console.log("/api/sendEmail got", skin_type, acne_prone, sun_sensitive);
   sendToEmail(email, skin_type, acne_prone, sun_sensitive);
-  console.log("Email sent");
+  //console.log("Email sent");
   res.json({ message: "sendEmail()" });
 });
 
