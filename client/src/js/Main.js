@@ -25,22 +25,22 @@ const questions = [
   {
     question: "What does your skin typically look like at the end of the day?",
     options: [
-      "My forehead and nose are very shiny and oily but my cheeks are matte.",
-      "Crazy oily.",
-      "Tight or splotchy. Like the desert. I need to put moisturizer on ASAP!",
-      "Dull and tired. It feels mostly dry.",
+      "My forehead and nose feels very shiny and oily but my cheeks are matte.",
+      "My skin feels crazy oily.",
+      "My skin feels tight or splotchy, like the desert. I need to put moisturizer on ASAP!",
+      "My skin feels dull and tired; it's mostly dry.",
       "My complexion is only slightly oily at the end of the day.",
-      "I have some redness and irritation when exposed to skincare products or other environmental factors.",
-      "It looks normal. Not overly dry or oily.",
+      "I experience redness and irritation when exposed to skincare products or other environmental factors.",
+      "My skin feels normal, not overly dry or oily.",
     ],
   },
   {
     question: "Describe your pores.",
     options: [
       "My pores are large, visible, and sometimes clogged all over my face.",
-      "Depends on where they are on my face. My pores are medium to large around my T-zone.",
-      "Small to medium-sized. My pores are small and not visible.",
-      "They seem to change with the day. My pores are visible but small.",
+      "My pores are medium to large around my T-zone.",
+      "My pores are small and not visible.",
+      "My pores are visible but small, and they seem to change throughout the day.",
     ],
   },
   {
