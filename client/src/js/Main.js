@@ -6,6 +6,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "./Header";
+import FeaturedProducts from "./FeaturedProducts";
 import axios from "axios";
 
 // The main quiz section
@@ -161,6 +162,7 @@ function Test() {
   const [acneProne, setAcneProne] = useState(null);
   const [sunSensitive, setSunSensitive] = useState(null);
   const [guidelines, setGuidelines] = useState(true);
+  const [showFeaturedProducts, setShowFeaturedProducts] = useState(false);
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -342,11 +344,11 @@ function Test() {
   if (currentQuestion >= questions.length) {
     if (!emailSubmitted) {
       return (
-        <div>
+        <div id="results" className="pb-8">
           <Header />
-          <div className="m-4 sm:m-12 md:m-14 lg:m-18 block lg:flex rounded-lg bg-emerald-900 p-5">
+          <div className="block lg:flex rounded-lg bg-emerald-900 max-[700px]:mx-8 max-[1000px]:mx-14 min-[1000px]:mx-16 p-5">
             {/* progress */}
-            <div className="flex items-center justify-center pt-3 lg:px-24">
+            <div className="flex align-middle items-center justify-center py-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
                 <Stepper
                   className="w-full"
@@ -363,9 +365,9 @@ function Test() {
               </ThemeProvider>
             </div>
 
-            <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
-              <div className="lg:px-52">
-                <h2 className="text-sm pt-10 lg:pt-10 px-3 lg:text-md font-bold text-center lg:py-4">
+            <div className="flex-1 bg-white mt-6 lg:mx-5 lg:mt-0 rounded-md">
+              <div className="min-[1000px]:px-14 min-[1400px]:px-28 min-[2000px]:px-96">
+                <h2 className="max-[700px]:text-sm pt-10 lg:pt-10 px-3 min-[700px]:text-md font-bold text-center lg:py-4">
                   Want to save your result? We would gladly email it to you
                 </h2>
                 <form
@@ -396,9 +398,9 @@ function Test() {
                 </form>
 
                 <div className="flex justify-center items-end pb-5">
-                  <p className="text-center text-xs">
+                  <p className="text-center text-xs max-[700px]:px-4 max-[1000px]:px-10">
                     *By entering your email, you consent to receive marketing
-                    emails. For further informtation, please consult our Privacy
+                    emails. For further information, please consult our Privacy
                     Policy.
                   </p>
                 </div>
@@ -409,11 +411,11 @@ function Test() {
       );
     } else {
       return (
-        <div id="results">
+        <div id="results" className="pb-8">
           <Header />
-          <div className="m-4 sm:m-12 md:m-14 lg:m-18 block lg:flex rounded-lg bg-emerald-900 p-5">
+          <div className="block lg:flex rounded-lg bg-emerald-900 max-[700px]:mx-8 max-[1000px]:mx-14 min-[1000px]:mx-16 p-5">
             {/* progress */}
-            <div className="flex items-center justify-center pt-3 lg:px-24">
+            <div className="flex items-center justify-center py-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
                 <Stepper
                   className="w-full"
@@ -430,9 +432,9 @@ function Test() {
               </ThemeProvider>
             </div>
 
-            <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
+            <div className="flex-1 bg-white mt-6 lg:mx-5 lg:mt-0 rounded-md">
               <div className="mx-5 xl:px-20 lg:py-5">
-                <h2 className="text-sm pt-5 px-3 lg:text-xl font-bold text-center lg:py-4">
+                <h2 className="text-sm pt-5 px-3 min-[700px]:text-xl font-bold text-center lg:py-4">
                   Here's your diagnosis:
                 </h2>
 
@@ -462,13 +464,15 @@ function Test() {
                 </div>
 
                 <div className="flex justify-center">
-                  <button className="block rounded-2xl bg-emerald-600 my-5 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700">
+                  <button className="block rounded-2xl bg-emerald-600 my-5 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700"
+                          onClick={() => setShowFeaturedProducts(true)}>
                     I want to see featured products
                   </button>
                 </div>
               </div>
             </div>
           </div>
+          {showFeaturedProducts && <FeaturedProducts />}
         </div>
       );
     }
@@ -479,11 +483,11 @@ function Test() {
 
   // Display the current question and options
   return (
-    <div>
+    <div id="quiz-page" className="pb-8">
       <Header />
-      <div className="m-4 sm:m-12 md:m-14 lg:m-18 block lg:flex rounded-lg bg-emerald-900 p-5">
+      <div className="block lg:flex rounded-lg bg-emerald-900 max-[700px]:mx-8 max-[1000px]:mx-14 min-[1000px]:mx-16 p-5">
         {/* progress */}
-        <div className="flex items-center justify-center pt-3 lg:px-24">
+        <div className="flex items-center justify-center py-3 lg:px-24">
           <ThemeProvider theme={quizTheme}>
             <Stepper
               className="w-full"
@@ -501,11 +505,11 @@ function Test() {
         </div>
 
         {/* question */}
-        <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
+        <div className="flex-1 bg-white mt-6 lg:mx-5 lg:mt-0 rounded-md">
           {/* show guidelines first */}
           {guidelines ? (
             <div className="lg:px-5 md:px-4">
-              <h2 className="text-sm pt-5 px-3 lg:text-md font-bold text-center lg:py-4">
+              <h2 className="max-[700px]:text-sm pt-5 px-3 min-[700px]:text-md font-bold text-center lg:py-4">
                 For more accurate results, please answer the questions as
                 truthfully as you can.
               </h2>
@@ -523,16 +527,16 @@ function Test() {
               </div>
             </div>
           ) : (
-            <div className="xl:px-52 lg:px-32">
-              <h2 className="text-sm pt-5 px-3 lg:text-md font-bold text-center lg:py-4">
+            <div className="min-[1400px]:px-24 min-[1000px]:px-16 py-5">
+              <h2 className="max-[700px]:text-sm px-3 min-[700px]:text-md font-bold text-center">
                 {question}
               </h2>
 
-              <ul className="pb-4 lg:pb-0">
+              <ul className="lg:pb-0">
                 {options.map((option) => (
                   // wrap li in button
                   <button
-                    className="mx-auto block text-sm lg:text-md w-3/4 lg:w-full lg:rounded-md rounded-3xl bg-emerald-600 my-5 px-5 lg:px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
+                    className="mx-auto block max-[700px]:text-sm min-[700px]:text-md w-3/4 lg:w-full lg:rounded-md rounded-3xl bg-emerald-600 my-5 px-5 lg:px-12 py-3 text-center font-semibold text-white hover:bg-emerald-700"
                     key={option}
                     onClick={() => {
                       handleAnswer(option);
@@ -548,7 +552,7 @@ function Test() {
 
               {currentQuestion > 0 && (
                 <ThemeProvider theme={theme}>
-                  <div className="flex justify-center">
+                  <div className="flex justify-center pb-4">
                     <Button
                       variant="text"
                       className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
