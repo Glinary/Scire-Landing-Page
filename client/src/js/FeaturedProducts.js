@@ -14,8 +14,8 @@ function FeaturedProducts() {
         <div className="border-2 border-emerald-900 mt-5 max-[700px]:mx-8 max-[1000px]:mx-14 min-[1000px]:mx-16 rounded-lg">
             <h1 className="text-center text-2xl font-bold max-[1000px]:py-10 min-[1000px]:py-12">Featured Products</h1>
 
-            <div className="max-[1000px]:px-6 max-[1000px]:mb-8 min-[1000px]:px-8 min-[1000px]:mb-8">
-                <div className="min-[1000px]:flex border border-emerald-900 rounded-md max-[700px]:px-4 max-[700px]:py-4 max-[1000px]:px-6 max-[1000px]:py-8 min-[1000px]:px-6 min-[1000px]:py-8 min-[1000px]:space-x-6 mb-6"> {/* Product 1 */}
+            <div className="max-[1000px]:px-6 max-[1000px]:mb-8 min-[1000px]:px-8 max-[700px]:mb-8 min-[700px]:mb-10 min-[1000px]:mb-14">
+                <div className="min-[1000px]:flex border border-emerald-900 border-opacity-40 rounded-md max-[700px]:px-4 max-[700px]:py-4 max-[1000px]:px-6 max-[1000px]:py-8 min-[1000px]:px-6 min-[1000px]:py-8 min-[1000px]:space-x-6 max-[700px]:mb-8 min-[700px]:mb-10 min-[1000px]:mb-14"> {/* Product 1 */}
                     <div className="max-[1000px]:flex min-[1000px]:flex max-[1000px]:space-x-4 min-[1000px]:space-x-4 min-[1000px]:basis-1/2 min-[1000px]:space-y-0">
                         <img src={oryol_1} alt="oryol-1" className="max-[1000px]:basis-1/2 min-[1000px]:basis-1/2 object-cover overflow-hidden max-[700px]:p-2 max-[1000px]:p-4 min-[1000px]:p-4 min-[1400px]:p-6 min-[1000px]:h-contain border border-[#aaaaaa]"></img>
                         <img src={oryol_2} alt="oryol-2" className="max-[1000px]:basis-1/2 min-[1000px]:basis-1/2 object-cover overflow-hidden max-[700px]:p-2 max-[1000px]:p-4 min-[1000px]:p-4 min-[1400px]:p-6 min-[1000px]:h-contain border border-[#aaaaaa]"></img>
@@ -28,7 +28,7 @@ function FeaturedProducts() {
                     </div>
                 </div>
 
-                <div className="min-[1000px]:flex border border-emerald-900 rounded-md max-[700px]:px-4 max-[700px]:py-4 max-[1000px]:px-6 max-[1000px]:py-8 min-[1000px]:px-6 min-[1000px]:py-8 min-[1000px]:space-x-6 mb-6"> {/* Product 1 */}
+                <div className="min-[1000px]:flex border border-emerald-900 border-opacity-40 rounded-md max-[700px]:px-4 max-[700px]:py-4 max-[1000px]:px-6 max-[1000px]:py-8 min-[1000px]:px-6 min-[1000px]:py-8 min-[1000px]:space-x-6 max-[700px]:mb-8 min-[700px]:mb-10 min-[1000px]:mb-14"> {/* Product 2 */}
                     <div className="max-[1000px]:flex min-[1000px]:flex max-[1000px]:space-x-4 min-[1000px]:space-x-4 min-[1000px]:basis-1/2 min-[1000px]:space-y-0">
                         <img src={magayon_1} alt="magayon-1" className="max-[1000px]:basis-1/2 min-[1000px]:basis-1/2 object-cover overflow-hidden max-[700px]:p-2 max-[1000px]:p-4 min-[1000px]:p-4 min-[1400px]:p-6 min-[1000px]:h-contain border border-[#aaaaaa]"></img>
                         <img src={magayon_2} alt="magayon-2" className="max-[1000px]:basis-1/2 min-[1000px]:basis-1/2 object-cover overflow-hidden max-[700px]:p-2 max-[1000px]:p-4 min-[1000px]:p-4 min-[1400px]:p-6 min-[1000px]:h-contain border border-[#aaaaaa]"></img>
@@ -41,7 +41,7 @@ function FeaturedProducts() {
                     </div>
                 </div>
 
-                <div className="min-[1000px]:flex border border-emerald-900 rounded-md max-[700px]:px-4 max-[700px]:py-4 max-[1000px]:px-6 max-[1000px]:py-8 min-[1000px]:px-6 min-[1000px]:py-8 min-[1000px]:space-x-6 mb-6"> {/* Product 1 */}
+                <div className="min-[1000px]:flex border border-emerald-900 border-opacity-40 rounded-md max-[700px]:px-4 max-[700px]:py-4 max-[1000px]:px-6 max-[1000px]:py-8 min-[1000px]:px-6 min-[1000px]:py-8 min-[1000px]:space-x-6"> {/* Product 3 */}
                     <div className="max-[1000px]:flex min-[1000px]:flex max-[1000px]:space-x-4 min-[1000px]:space-x-4 min-[1000px]:basis-1/2 min-[1000px]:space-y-0">
                         <img src={handyong_1} alt="handyong-1" className="max-[1000px]:basis-1/2 min-[1000px]:basis-1/2 object-cover overflow-hidden max-[700px]:p-2 max-[1000px]:p-4 min-[1000px]:p-4 min-[1400px]:p-6 min-[1000px]:h-contain border border-[#aaaaaa]"></img>
                         <img src={handyong_2} alt="handyong-2" className="max-[1000px]:basis-1/2 min-[1000px]:basis-1/2 object-cover overflow-hidden max-[700px]:p-2 max-[1000px]:p-4 min-[1000px]:p-4 min-[1400px]:p-6 min-[1000px]:h-contain border border-[#aaaaaa]"></img>
