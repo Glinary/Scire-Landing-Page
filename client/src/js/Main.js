@@ -527,8 +527,8 @@ function Test() {
               </div>
             </div>
           ) : (
-            <div className="min-[1400px]:px-24 min-[1000px]:px-16">
-              <h2 className="max-[700px]:text-sm pt-5 px-3 min-[700px]:text-md font-bold text-center">
+            <div className="min-[1400px]:px-24 min-[1000px]:px-16 py-5">
+              <h2 className="max-[700px]:text-sm px-3 min-[700px]:text-md font-bold text-center">
                 {question}
               </h2>
 
