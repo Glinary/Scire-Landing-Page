@@ -7,7 +7,6 @@ import StepLabel from "@mui/material/StepLabel";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "./Header";
 import FeaturedProducts from "./FeaturedProducts";
-import FeaturedProducts from "./FeaturedProducts";
 import axios from "axios";
 
 // The main quiz section
@@ -533,7 +532,7 @@ function Test() {
                 {question}
               </h2>
 
-              <ul className="pb-4 lg:pb-0">
+              <ul className="lg:pb-0">
                 {options.map((option) => (
                   // wrap li in button
                   <button
@@ -553,7 +552,7 @@ function Test() {
 
               {currentQuestion > 0 && (
                 <ThemeProvider theme={theme}>
-                  <div className="flex justify-center">
+                  <div className="flex justify-center pb-4">
                     <Button
                       variant="text"
                       className="my-5 font-semibold text-emerald-700 hover:text-emerald-800"
