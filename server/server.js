@@ -87,236 +87,328 @@ async function sendToEmail(email, skin_type, acne_prone, sun_sensitive) {
   });
 
   var emailTemplate = `
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml">
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Document</title>
-          <!-- <link rel="stylesheet" href="emailtemp.css" /> -->
-          <style type="text/css">
-            @import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100;200;300;400;500;600;700&family=Koulen&family=League+Spartan:wght@300;400&display=swap");
-            :root {
-              --main-yellow: #da9b2a;
-              --main-green: #004438;
-              --font1: "Koulen", sans-serif;
-              --font2: "Antonio", sans-serif;
-              --font3: "League Spartan", sans-serif;
-            }
-            body {
-              margin: 0;
-              padding: 0;
-              position: relative;
-              background-color: #f2f2f2f2;
-              color: #004438;
-            }
-
-            .wrapper {
-              width: 100%;
-              height: max-content;
-              position: relative;
-              background-color: #f2f2f2f2;
-              z-index: 100;
-            }
-
-            .main-wrapper {
-              width: 100%;
-              position: relative;
-              max-width: 500px;
-              background-color: #ffffff;
-              overflow: hidden;
-              box-sizing: border-box;
-              z-index: 100;
-            }
-
-            .header-logo {
-              width: 100%;
-              height: 4rem;
-              background-color: #da9b2a;
-              position: relative;
-              z-index: 100;
-            }
-
-            .header-logo img {
-              width: 4rem;
-            }
-
-            .add-fl {
-              z-index: 1;
-            }
-
-            .add-fl img {
-              position: absolute;
-              width: 18rem;
-              top: -1.8rem;
-              right: -5rem;
-              z-index: 1;
-            }
-
-            .result-wrapper {
-              position: relative;
-              width: 100%;
-              height: fit-content;
-              background-color: #fdfaf3;
-            }
-
-            .greet {
-              position: relative;
-              margin: 0;
-              padding-top: 3rem;
-              font-family: var(--font3);
-              z-index: 100;
-            }
-
-            .result-wrapper p {
-              position: relative;
-              margin: 5px;
-              font-family: "League Spartan", sans-serif;
-              font-weight: 300;
-              z-index: 100;
-            }
-
-            .result {
-              margin-top: 3rem;
-              font-family: var(--font2);
-              width: max-content;
-            }
-
-            .result h1 {
-              font-size: 1.5em;
-            }
-
-            .result-list {
-              text-align: left;
-              height: fit-content;
-              width: 100%;
-            }
-
-            .add-wrapper {
-              display: flex;
-              height: fit-content;
-            }
-
-            .res-exp {
-              height: fit-content;
-              border: 1px solid #004438;
-              padding: 1rem;
-              margin: 1rem;
-              border-radius: 8px;
-              font-family: var(--font3);
-              font-weight: 300;
-              font-size: 70%;
-              min-width: 220px;
-            }
-
-            .add-model {
-              height: 10.5rem;
-            }
-            .add-model img {
-              height: 10.5rem;
-              width: auto;
-              z-index: 1;
-            }
-
-            .footer-wrapper {
-              position: relative;
-              background-color: #da9b2a;
-              width: 100%;
-              height: fit-content;
-              display: flex;
-              padding: 0 1rem;
-              z-index: 100;
-              box-sizing: border-box;
-              margin-top: 0rem;
-            }
-
-            .footer-logo img {
-              width: 6rem;
-            }
-
-            .soc-links {
-              width: 100%;
-              text-align: right;
-            }
-            .soc-links img {
-              width: 1.35rem;
-              text-align: right;
-              padding: 0.55rem 0.2rem;
-            }
-          </style>
-        </head>
-        <body>
-          <center class="wrapper">
-            <div class="main-wrapper">
-              <!--
-              <div class="add-fl">
-                <img
-                  src="https://i.ibb.co/QdK7DWc/Alstroemeria-Flowers.png"
-                  alt=""
-                />
-              </div> -->
-              <div class="header-logo">
-                <img
-                  src="https://i.ibb.co/9Gsf1FB/scire-essentials-master-file-Seal-green.png"
-                  alt="scire logo"
-                />
-              </div>
-
-              <div class="result-wrapper">
-                <h1 class="greet">SkinGenius</h1>
-                <p>The beginning of your skin care journey</p>
-                <div class="result">
-                  <h1>Your Skin Test Result:</h1>
-                  <div class="result-list">
-                    <p>Skin Type: ${skin_type}</p>
-                    <!--Add variable here - Skin Type -->
-                    <p>Acne Prone: ${acne_prone}</p>
-                    <!--Add variable here - Acne Prone -->
-                    <p>Sun Sensitive: ${sun_sensitive}</p>
-                    <!--Add variable here - Sun Sensitive-->
-                  </div>
-                </div>           
-
-                <div class="add-wrapper">
-                  <div class="res-exp">
-                    Your skin type is oily which means that Dolor nostrud proident
-                    elit mollit ex occaecat lorem ullamco et tempor amet laborum
-                    dolore non ullamco cillum id enim. Officia cupidatat magna
-                    exercitation nisi pariatur magna quis
-                  </div>
-                  <div class="add-model">
-                    <img src="https://i.ibb.co/wJxt5FV/result-model.png" alt="" />
-                  </div>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <!-- <link rel="stylesheet" href="emailtemp.css" /> -->
+        <style type="text/css">
+          @import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100;200;300;400;500;600;700&family=Koulen&family=League+Spartan:wght@300;400&display=swap");
+          :root {
+            --main-yellow: #da9b2a;
+            --main-green: #004438;
+            --font1: "Koulen", sans-serif;
+            --font2: "Antonio", sans-serif;
+            --font3: "League Spartan", sans-serif;
+          }
+          body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background-color: #f2f2f2f2;
+            color: #004438;
+          }
+  
+          .wrapper {
+            width: 100%;
+            height: max-content;
+            position: relative;
+            background-color: #f2f2f2f2;
+            z-index: 100;
+          }
+  
+          .main-wrapper {
+            width: 100%;
+            position: relative;
+            max-width: 500px;
+            background-color: #ffffff;
+            overflow: hidden;
+            box-sizing: border-box;
+            z-index: 100;
+          }
+  
+          .header-logo {
+            width: 100%;
+            height: 4rem;
+            background-color: #da9b2a;
+            position: relative;
+            z-index: 100;
+          }
+  
+          .header-logo img {
+            width: 4rem;
+          }
+  
+          .add-fl {
+            z-index: 1;
+          }
+  
+          .add-fl img {
+            position: absolute;
+            width: 18rem;
+            top: -1.8rem;
+            right: -5rem;
+            z-index: 1;
+          }
+  
+          .result-wrapper {
+            position: relative;
+            width: 100%;
+            height: fit-content;
+            background-color: #fdfaf3;
+            color: #004438;
+          }
+  
+          .greet {
+            position: relative;
+            margin: 0;
+            padding-top: 3rem;
+            font-family: var(--font3);
+            z-index: 100;
+          }
+  
+          .result-wrapper p {
+            position: relative;
+            margin: 5px;
+            font-family: "League Spartan", sans-serif;
+            font-weight: 300;
+            z-index: 100;
+          }
+  
+          .result {
+            margin-top: 3rem;
+            font-family: var(--font2);
+            width: max-content;
+          }
+  
+          .result h1 {
+            font-size: 1.5em;
+          }
+  
+          .result-list {
+            text-align: left;
+            height: fit-content;
+            width: 100%;
+          }
+  
+          .add-wrapper {
+            display: flex;
+            height: fit-content;
+          }
+  
+          .res-exp {
+            height: fit-content;
+            border: 1px solid #004438;
+            padding: 1rem 0.65rem;
+            margin: 2.5rem 1.5rem 0rem 1.5rem;
+            border-radius: 8px;
+            font-family: var(--font3);
+            font-weight: 300;
+            font-size: 70%;
+            min-width: 220px;
+            color: #004438;
+          }
+  
+          .add-model {
+            height: 10.5rem;
+          }
+          .add-model img {
+            height: 10.5rem;
+            width: auto;
+            z-index: 1;
+          }
+  
+          .footer-wrapper {
+            position: relative;
+            background-color: #da9b2a;
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            padding: 0 1rem;
+            z-index: 100;
+            box-sizing: border-box;
+            margin-top: 0rem;
+          }
+  
+          .footer-logo img {
+            width: 6rem;
+          }
+  
+          .soc-links {
+            width: 100%;
+            text-align: right;
+          }
+          .soc-links img {
+            width: 1.35rem;
+            text-align: right;
+            padding: 0.85rem 0.2rem 0.2rem 0.65rem;
+          }
+  
+          .featured {
+            height: fit-content;
+            width: 100%;
+            background-color: #fdfaf3;
+            border-top: 0.8rem solid rgb(243, 236, 236);
+          }
+  
+          .f-title {
+            width: 100%;
+            color: #004438;
+            padding: 2rem 0rem;
+            font-size: 1.5em;
+            font-family: var(--font3);
+          }
+  
+          .products {
+            height: fit-content;
+            width: 100%;
+            padding-bottom: 2rem;
+          }
+  
+          .f1 {
+            width: 80%;
+            height: fit-content;
+            padding: 1rem 0rem;
+            display: flex;
+            box-sizing: border-box;
+          }
+  
+          .fimg {
+            height: 5rem;
+            width: auto;
+            padding: 0.35rem;
+            border: 1px solid rgb(0, 62, 50, 0.3);
+          }
+  
+          .fimg img {
+            position: relative;
+            height: inherit;
+            width: auto;
+          }
+  
+          .desc {
+            width: 100%;
+            height: 5rem;
+            padding: 0.4rem 0rem;
+            background-color: rgb(243, 236, 236);
+            overflow-x: hidden;
+            color: #004438;
+          }
+  
+          .desc h1 {
+            font-size: 1.45em;
+            padding-top: 1rem;
+            margin: 0;
+          }
+  
+          .desc p {
+            text-align: center;
+            font-size: 0.65em;
+            margin: 0;
+          }
+        </style>
+      </head>
+      <body>
+        <center class="wrapper">
+          <div class="main-wrapper">
+            <div class="header-logo">
+              <img
+                src="https://i.ibb.co/9Gsf1FB/scire-essentials-master-file-Seal-green.png"
+                alt="scire logo"
+              />
+            </div>
+  
+            <div class="result-wrapper">
+              <h1 class="greet">SkinGenius</h1>
+              <p>The beginning of your skin care journey</p>
+              <div class="result">
+                <h1>Your Skin Test Result:</h1>
+                <div class="result-list">
+                  <p>Skin Type: ${skin_type}</p>
+                  <!--Add variable here - Skin Type -->
+                  <p>Acne Prone: ${acne_prone}</p>
+                  <!--Add variable here - Acne Prone -->
+                  <p>Sun Sensitive: ${sun_sensitive}</p>
+                  <!--Add variable here - Sun Sensitive-->
                 </div>
               </div>
-              <div class="footer-wrapper">
-                <div class="footer-logo">
-                  <img
-                    src="https://i.ibb.co/vhQykTr/scire-essentials-master-file-Lockup-horizontal-green.png"
-                    alt=""
-                  />
+  
+              <div class="add-wrapper">
+                <div class="res-exp"> // TODO: CHANGE THIS DESC
+                  Your skin type is oily which means that Dolor nostrud proident
+                  elit mollit ex occaecat lorem ullamco et tempor amet laborum
+                  dolore non ullamco cillum id enim. Officia cupidatat magna
+                  exercitation nisi pariatur magna quis
                 </div>
-                <div class="soc-links">
-                  <img
-                    src="https://i.ibb.co/G5BCtxW/facebook.png"
-                    alt="facebook"
-                    border="0"
-                  />
-                  <img
-                    src="https://i.ibb.co/RYZQqZC/email.png"
-                    alt="email"
-                    border="0"
-                  />
+  
+                <div class="add-model">
+                  <img src="https://i.ibb.co/wJxt5FV/result-model.png" alt="" />
                 </div>
               </div>
             </div>
-          </center>
-        </body>
-      </html>
+            <div class="featured">
+              <div class="f-title">Featured Products</div>
+              <div class="products">
+                <div class="f1">
+                  <div class="fimg">
+                    <img src="https://i.ibb.co/SVdnnHJ/DSCF3358.jpg" alt="" />
+                  </div>
+                  <div class="desc">
+                    <h1>Handyong</h1>
+                    <p>Elemi Fresh Bar Soap</p>
+                  </div>
+                </div>
+                <div class="f1">
+                  <div class="fimg">
+                    <img src="https://i.ibb.co/XFGQ3XQ/DSCF3335.jpg" alt="" />
+                  </div>
+                  <div class="desc">
+                    <h1>Oryol</h1>
+                    <p>Elemi Rejuvinating Bar Soap</p>
+                  </div>
+                </div>
+                <div class="f1">
+                  <div class="fimg">
+                    <img src="https://i.ibb.co/ssVRXmq/DSCF3357.jpg" alt="" />
+                  </div>
+                  <div class="desc">
+                    <h1>Magayon</h1>
+                    <p>Elemi Glow Bar Soap</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer-wrapper">
+              <div class="footer-logo">
+                <img
+                  src="https://i.ibb.co/vhQykTr/scire-essentials-master-file-Lockup-horizontal-green.png"
+                  alt=""
+                />
+              </div>
+              <div class="soc-links">
+                <img
+                  src="https://i.ibb.co/G5BCtxW/facebook.png"
+                  alt="facebook"
+                  border="0"
+                />
+                <img
+                  src="https://i.ibb.co/RYZQqZC/email.png"
+                  alt="email"
+                  border="0"
+                />
+              </div>
+            </div>
+          </div>
+        </center>
+      </body>
     </html>
-  `
+  </html>
   
+  `;
+
   // Create a template for the email text
   var emailText = `
     Your results:
