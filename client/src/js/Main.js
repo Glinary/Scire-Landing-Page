@@ -346,9 +346,9 @@ function Test() {
       return (
         <div id="results" className="pb-8">
           <Header />
-          <div className="block lg:flex rounded-lg bg-emerald-900 m-4 sm:m-12 md:m-14 lg:m-18 mx-20 p-5">
+          <div className="block lg:flex rounded-lg bg-emerald-900 max-[700px]:mx-8 max-[1000px]:mx-14 min-[1000px]:mx-16 p-5">
             {/* progress */}
-            <div className="flex items-center justify-center pt-3 lg:px-24">
+            <div className="flex align-middle items-center justify-center py-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
                 <Stepper
                   className="w-full"
@@ -365,8 +365,8 @@ function Test() {
               </ThemeProvider>
             </div>
 
-            <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
-              <div className="lg:px-52">
+            <div className="flex-1 bg-white mt-6 lg:mx-5 lg:mt-0 rounded-md">
+              <div className="min-[1000px]:px-14 min-[1400px]:px-28 min-[2000px]:px-96">
                 <h2 className="text-sm pt-10 lg:pt-10 px-3 lg:text-md font-bold text-center lg:py-4">
                   Want to save your result? We would gladly email it to you
                 </h2>
@@ -398,7 +398,7 @@ function Test() {
                 </form>
 
                 <div className="flex justify-center items-end pb-5">
-                  <p className="text-center text-xs">
+                  <p className="text-center text-xs max-[700px]:px-4 max-[1000px]:px-10">
                     *By entering your email, you consent to receive marketing
                     emails. For further informtation, please consult our Privacy
                     Policy.
@@ -413,9 +413,9 @@ function Test() {
       return (
         <div id="results" className="pb-8">
           <Header />
-          <div className="block lg:flex rounded-lg bg-emerald-900 m-4 sm:m-12 md:m-14 lg:m-18 mx-20 p-5">
+          <div className="block lg:flex rounded-lg bg-emerald-900 max-[700px]:mx-8 max-[1000px]:mx-14 min-[1000px]:mx-16 p-5">
             {/* progress */}
-            <div className="flex items-center justify-center pt-3 lg:px-24">
+            <div className="flex items-center justify-center py-3 lg:px-24">
               <ThemeProvider theme={quizTheme}>
                 <Stepper
                   className="w-full"
@@ -432,7 +432,7 @@ function Test() {
               </ThemeProvider>
             </div>
 
-            <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
+            <div className="flex-1 bg-white mt-6 lg:mx-5 lg:mt-0 rounded-md">
               <div className="mx-5 xl:px-20 lg:py-5">
                 <h2 className="text-sm pt-5 px-3 lg:text-xl font-bold text-center lg:py-4">
                   Here's your diagnosis:
@@ -485,9 +485,9 @@ function Test() {
   return (
     <div id="quiz-page" className="pb-8">
       <Header />
-      <div className="block lg:flex rounded-lg bg-emerald-900 m-4 sm:m-12 md:m-14 lg:m-18 mx-20 p-5">
+      <div className="block lg:flex rounded-lg bg-emerald-900 max-[700px]:mx-8 max-[1000px]:mx-14 min-[1000px]:mx-16 p-5">
         {/* progress */}
-        <div className="flex items-center justify-center pt-3 lg:px-24">
+        <div className="flex items-center justify-center py-3 lg:px-24">
           <ThemeProvider theme={quizTheme}>
             <Stepper
               className="w-full"
@@ -505,7 +505,7 @@ function Test() {
         </div>
 
         {/* question */}
-        <div className="flex-1 bg-white mt-10 lg:mx-5 lg:mt-0 rounded-md">
+        <div className="flex-1 bg-white mt-6 lg:mx-5 lg:mt-0 rounded-md">
           {/* show guidelines first */}
           {guidelines ? (
             <div className="lg:px-5 md:px-4">
