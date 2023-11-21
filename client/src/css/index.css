@@ -45,7 +45,7 @@ p {
   /* Mobile */
   #landing-page, #quiz-page, #email-input, #results {
     background-image: url('assets/orange flower mobile.png'), url('assets/scire logo.png'), url('assets/purple flower mobile.png');
-    background-position: 100% 100%, 50% 3.5%, 0% 10%;
+    background-position: 100% 100%, 50% 5%, 0% 15%;
     background-size: 50%, 60%, 20%;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
