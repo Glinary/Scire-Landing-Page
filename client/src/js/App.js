@@ -1,4 +1,4 @@
-import "../css/App.css";
+//import "../css/App.css";
 import Main from "./Main";
 import About from "./About";
 import "@fontsource/roboto/300.css";
