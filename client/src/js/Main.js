@@ -7,6 +7,7 @@ import StepLabel from "@mui/material/StepLabel";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "./Header";
 import FeaturedProducts from "./FeaturedProducts";
+import FeaturedProducts from "./FeaturedProducts";
 import axios from "axios";
 
 // The main quiz section
