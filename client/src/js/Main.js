@@ -6,6 +6,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "./Header";
+import FeaturedProducts from "./FeaturedProducts";
 import axios from "axios";
 
 // The main quiz section
@@ -161,6 +162,7 @@ function Test() {
   const [acneProne, setAcneProne] = useState(null);
   const [sunSensitive, setSunSensitive] = useState(null);
   const [guidelines, setGuidelines] = useState(true);
+  const [showFeaturedProducts, setShowFeaturedProducts] = useState(false);
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -462,13 +464,15 @@ function Test() {
                 </div>
 
                 <div className="flex justify-center">
-                  <button className="block rounded-2xl bg-emerald-600 my-5 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700">
+                  <button className="block rounded-2xl bg-emerald-600 my-5 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700"
+                          onClick={() => setShowFeaturedProducts(true)}>
                     I want to see featured products
                   </button>
                 </div>
               </div>
             </div>
           </div>
+          {showFeaturedProducts && <FeaturedProducts />}
         </div>
       );
     }
