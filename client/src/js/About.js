@@ -2,7 +2,7 @@ import React from "react";
 
 // For the About section 
 function About() {
-  console.log("About component rendered");
+  //console.log("About component rendered");
 
   return (
     <div id="about-container">

@@ -168,7 +168,7 @@ function Test() {
 
   useEffect(() => {
     // Check screen width on mount and on resize
-    console.log(window.innerHeight);
+    //console.log(window.innerHeight);
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 1023); // Set the desired breakpoint
     };
