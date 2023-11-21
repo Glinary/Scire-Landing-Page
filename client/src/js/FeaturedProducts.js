@@ -53,10 +53,6 @@ function FeaturedProducts() {
                         <p className="max-[1000px]:text-xs min-[1000px]:text-sm min-[1400px]:text-base">Ingredients: Aqua, Palm Oil, Coconut Oil, Olive Oil, Lye, Aloe Vera, Elemi Oil, Tea Tree Oil, Peppermint Oil, Elemi Resinoid</p>
                     </div>
                 </div>
-
-                
-                
-                
             </div>
         </div>
     );
