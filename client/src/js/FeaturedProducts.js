@@ -11,7 +11,7 @@ function FeaturedProducts() {
     console.log("Featured products rendered");
 
     return (
-        <div className="border-2 border-emerald-900 mt-5 max-[700px]:mx-8 max-[1000px]:mx-14 min-[1000px]:mx-16 rounded-lg">
+        <div className="border-2 border-emerald-900 mt-5 max-[700px]:mx-8 max-[1000px]:mx-14 min-[1000px]:mx-16 rounded-lg max-[1000px]:mb-20">
             <h1 className="text-center text-2xl font-bold max-[1000px]:py-10 min-[1000px]:py-12">Featured Products</h1>
 
             <div className="max-[1000px]:px-6 max-[1000px]:mb-8 min-[1000px]:px-8 max-[700px]:mb-8 min-[700px]:mb-10 min-[1000px]:mb-14">
