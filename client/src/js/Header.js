@@ -1,7 +1,4 @@
 import React from "react";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./theme";
 
 // Header Section
 // Header Section
@@ -16,21 +13,12 @@ const Header = () => {
         The beginning of your skin care journey
       </p>
       
-      <p className="text-xl text-center pt-5 min-[700px]:text-xl max-[700px]:text-xs max-[700px]:px-10 min-[700px]:px-6">
+      <p className="text-xl text-center pb-5 pt-5 min-[700px]:text-xl max-[700px]:text-xs max-[700px]:px-10 min-[700px]:px-6">
         Scire Essentials presents you a test to check your skin type and become{" "}
         <span className="hidden md:inline"><br/></span>
         aware which products and routine suits your skin better.
       </p>
 
-      <div className="flex flex-row items-center justify-center">
-        <p className="text-center text-xl max-[700px]:text-xs py-6 pr-2">
-          You may also try our Messenger chatbot here:
-        </p>
-
-        <ThemeProvider theme={theme}>
-          <FacebookIcon color="primary" />
-        </ThemeProvider>
-      </div>
     </div>
   );
 };
