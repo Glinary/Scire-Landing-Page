@@ -96,6 +96,30 @@ function connectToDatabase() {
   /// axios version
 }
 
+function copyLinkToClipboard() {
+  var linkInput = document.getElementById("websiteLink").value;
+  var textarea = document.createElement("textarea");
+  textarea.value = linkInput;
+  document.body.appendChild(textarea);
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); 
+
+  // Try catch was used in case modern websites drop support for the API
+  try {
+    // Use the Clipboard API to copy the selected text to the clipboard
+    // Note that the command is depcrecated but modern websites like Chrome have yet to drop it.
+    document.execCommand("copy");
+    alert("The quiz link was copied to your clipboard.\nShare the quiz to your friends!");
+  } catch (err) {
+    console.error("Unable to copy to clipboard", err);
+  } finally {
+    // Remove the temporary textarea
+    document.body.removeChild(textarea);
+  }
+}
+
+
+
 function storeResponse(currentQuestion, letter) {
   //console.log("I am at storeResponse()");
 
@@ -461,6 +485,14 @@ function Test() {
 
                 <div className="flex w-full ring-1 ring-emerald-800 rounded-md p-2 my-8">
                   <p>Skin type desc lorem ipsum dolor</p>
+                </div>
+
+                <div className="flex justify-center">
+                  <input type="hidden" value="scireessentials.com" id="websiteLink"></input>
+                  <button className="block rounded-2xl bg-emerald-600 my-0 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700"
+                          onClick={() => copyLinkToClipboard()}>
+                    Share the test!
+                  </button>
                 </div>
 
                 <div className="flex justify-center">
