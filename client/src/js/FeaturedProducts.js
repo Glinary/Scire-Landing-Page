@@ -1,4 +1,7 @@
 import React from "react";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./theme";
 import magayon_1 from "./images/DSCF3390.jpg"
 import magayon_2 from "./images/DSCF3357.jpg"
 import handyong_1 from "./images/DSCF3438.jpg"
@@ -46,6 +49,17 @@ function FeaturedProducts() {
                         </p>
                     </div>
                 </div>
+                
+                <div className="flex flex-row items-center justify-center pt-5">
+                    <p className="text-center text-xl max-[700px]:text-xs pt-0 pl-0 pb-0 pr-2">
+                    Try our Messenger chatbot here: 
+                    </p>
+
+                    <ThemeProvider theme={theme}>
+                    <FacebookIcon color="primary" />
+                    </ThemeProvider>
+                </div>
+
             </div>
         </div>
     );
