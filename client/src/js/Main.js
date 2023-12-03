@@ -89,6 +89,8 @@ function connectToDatabase() {
   axios
     .post("/api/start", {
       sessionId: "sampleSessionId",
+    }, {
+      withCredentials: true,
     })
     .then(function (response) {
       console.log(response);
@@ -128,6 +130,8 @@ function storeResponse(currentQuestion, letter) {
     .post("/api/storeResponse", {
       currentQuestion: currentQuestion,
       letter: letter,
+    },{
+      withCredentials: true,
     })
     .then(function (response) {
       console.log(response);
@@ -142,6 +146,8 @@ async function storeEmail(email) {
   axios
     .post("/api/storeEmail", {
       email: email,
+    }, {
+      withCredentials: true,
     })
     .then(function (response) {
       console.log(response);
@@ -159,6 +165,8 @@ async function storeResults(email, skin_type, acne_prone, sun_sensitive) {
     skin_type: skin_type,
     acne_prone: acne_prone,
     sun_sensitive: sun_sensitive,
+  }, {
+    withCredentials: true,
   });
 }
 
@@ -170,6 +178,8 @@ async function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
     skin_type: skin_type,
     acne_prone: acne_prone,
     sun_sensitive: sun_sensitive,
+  }, {
+    withCredentials: true,
   });
 }
 
@@ -273,7 +283,9 @@ function Test() {
     let skin_type, acne_prone, sun_sensitive;
 
     axios
-      .get("/api/getAnswers")
+      .get("/api/getAnswers", {
+        withCredentials: true,
+      })
       .then(function (response) {
         const q1 = response.data.option0;
         const q2 = response.data.option1;
