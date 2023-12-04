@@ -9,11 +9,11 @@ import Header from "./Header";
 import FeaturedProducts from "./FeaturedProducts";
 import axios from "axios";
 
-import sensitive from "./images/sensitive-min.jpg"
-import dry from "./images/dry-min.jpg"
-import combination from "./images/combination-min.jpg"
-import normal from "./images/normal-min.jpg"
-import oily from "./images/oily-min.jpg"
+import sensitive from "./images/sensitive-min.jpg";
+import dry from "./images/dry-min.jpg";
+import combination from "./images/combination-min.jpg";
+import normal from "./images/normal-min.jpg";
+import oily from "./images/oily-min.jpg";
 
 // The main quiz section
 
@@ -93,11 +93,15 @@ function connectToDatabase() {
 
   /// axios version
   axios
-    .post("/api/start", {
-      sessionId: "sampleSessionId",
-    }, {
-      withCredentials: true,
-    })
+    .post(
+      "/api/start",
+      {
+        sessionId: "sampleSessionId",
+      },
+      {
+        withCredentials: true,
+      }
+    )
     .then(function (response) {
       console.log(response);
     });
@@ -110,14 +114,16 @@ function copyLinkToClipboard() {
   textarea.value = linkInput;
   document.body.appendChild(textarea);
   textarea.select();
-  textarea.setSelectionRange(0, 99999); 
+  textarea.setSelectionRange(0, 99999);
 
   // Try catch was used in case modern websites drop support for the API
   try {
     // Use the Clipboard API to copy the selected text to the clipboard
     // Note that the command is depcrecated but modern websites like Chrome have yet to drop it.
     document.execCommand("copy");
-    alert("The quiz link was copied to your clipboard.\nShare the quiz to your friends!");
+    alert(
+      "The quiz link was copied to your clipboard.\nShare the quiz to your friends!"
+    );
   } catch (err) {
     console.error("Unable to copy to clipboard", err);
   } finally {
@@ -126,19 +132,21 @@ function copyLinkToClipboard() {
   }
 }
 
-
-
 function storeResponse(currentQuestion, letter) {
   //console.log("I am at storeResponse()");
 
   // axios version
   axios
-    .post("/api/storeResponse", {
-      currentQuestion: currentQuestion,
-      letter: letter,
-    },{
-      withCredentials: true,
-    })
+    .post(
+      "/api/storeResponse",
+      {
+        currentQuestion: currentQuestion,
+        letter: letter,
+      },
+      {
+        withCredentials: true,
+      }
+    )
     .then(function (response) {
       console.log(response);
     });
@@ -150,11 +158,15 @@ async function storeEmail(email) {
 
   // axios version
   axios
-    .post("/api/storeEmail", {
-      email: email,
-    }, {
-      withCredentials: true,
-    })
+    .post(
+      "/api/storeEmail",
+      {
+        email: email,
+      },
+      {
+        withCredentials: true,
+      }
+    )
     .then(function (response) {
       console.log(response);
     });
@@ -167,26 +179,34 @@ async function storeResults(email, skin_type, acne_prone, sun_sensitive) {
   //console.log("I am at storeResults()");
   sendEmail(email, skin_type, acne_prone, sun_sensitive);
 
-  axios.post("/api/storeResults", {
-    skin_type: skin_type,
-    acne_prone: acne_prone,
-    sun_sensitive: sun_sensitive,
-  }, {
-    withCredentials: true,
-  });
+  axios.post(
+    "/api/storeResults",
+    {
+      skin_type: skin_type,
+      acne_prone: acne_prone,
+      sun_sensitive: sun_sensitive,
+    },
+    {
+      withCredentials: true,
+    }
+  );
 }
 
 async function sendEmail(email, skin_type, acne_prone, sun_sensitive) {
   //console.log("I am at sendEmail()");
 
-  axios.post("/api/sendEmail", {
-    email: email,
-    skin_type: skin_type,
-    acne_prone: acne_prone,
-    sun_sensitive: sun_sensitive,
-  }, {
-    withCredentials: true,
-  });
+  axios.post(
+    "/api/sendEmail",
+    {
+      email: email,
+      skin_type: skin_type,
+      acne_prone: acne_prone,
+      sun_sensitive: sun_sensitive,
+    },
+    {
+      withCredentials: true,
+    }
+  );
 }
 
 function Test() {
@@ -371,24 +391,35 @@ function Test() {
           sun_sensitive = "Not Sun Sensitive";
         }
 
-        if(skin_type === "Sensitive") {
-          skin_type_desc = "Your skin type is <strong>Sensitive</strong>! It is more likely to react to external stimuli than normal skin. Your skin tends to be sensitive to heat, surfactants, and exfoliation, often resulting in irritation, redness, or swelling.";
+        if (skin_type === "Sensitive") {
+          skin_type_desc =
+            "Your skin type is <strong>Sensitive</strong>! It is more likely to react to external stimuli than normal skin. Your skin tends to be sensitive to heat, surfactants, and exfoliation, often resulting in irritation, redness, or swelling.";
           skin_type_img = sensitive;
-        } else if(skin_type === "Dry") {
-          skin_type_desc = "Your skin type is <strong>Dry</strong>! It usually feels tight, rough, and irritable, with a tendency to look flaky or even scaly. Additionally, dry skin often appears dehydrated and has visibly small pores.";
+        } else if (skin_type === "Dry") {
+          skin_type_desc =
+            "Your skin type is <strong>Dry</strong>! It usually feels tight, rough, and irritable, with a tendency to look flaky or even scaly. Additionally, dry skin often appears dehydrated and has visibly small pores.";
           skin_type_img = dry;
-        } else if(skin_type === "Combination") {
-          skin_type_desc = "Your skin type is <strong>Combination</strong>! It may be oily or normal around your nose, forehead, and chin (the T-Zone area of the face). Conversely, it could be dry or normal around your cheeks, mouth, and eyes (the U-Zone area of the face).";
+        } else if (skin_type === "Combination") {
+          skin_type_desc =
+            "Your skin type is <strong>Combination</strong>! It may be oily or normal around your nose, forehead, and chin (the T-Zone area of the face). Conversely, it could be dry or normal around your cheeks, mouth, and eyes (the U-Zone area of the face).";
           skin_type_img = combination;
-        } else if(skin_type === "Normal") {
-          skin_type_desc = "Your skin type is <strong>Normal</strong>! It boasts a regular texture with no noticeable imperfections, maintaining a clean and soft appearance. Normal skin typically does not require special care, as it tends to stay balanced and resilient.";
+        } else if (skin_type === "Normal") {
+          skin_type_desc =
+            "Your skin type is <strong>Normal</strong>! It boasts a regular texture with no noticeable imperfections, maintaining a clean and soft appearance. Normal skin typically does not require special care, as it tends to stay balanced and resilient.";
           skin_type_img = normal;
-        } else if(skin_type === "Oily") {
-          skin_type_desc = "Your skin type is <strong>Oily</strong>! It has a porous, humid and bright appearance. It tends to produce excess sebum and a susceptibility to acne and blackheads. Oily skin may require additional attention to manage oil production and maintain a matte finish throughout the day.";
+        } else if (skin_type === "Oily") {
+          skin_type_desc =
+            "Your skin type is <strong>Oily</strong>! It has a porous, humid and bright appearance. It tends to produce excess sebum and a susceptibility to acne and blackheads. Oily skin may require additional attention to manage oil production and maintain a matte finish throughout the day.";
           skin_type_img = oily;
         }
 
-        storeResults(email, skin_type, acne_prone, sun_sensitive, skin_type_desc);
+        storeResults(
+          email,
+          skin_type,
+          acne_prone,
+          sun_sensitive,
+          skin_type_desc
+        );
 
         setSkinType(skin_type);
         setAcneProne(acne_prone);
@@ -396,7 +427,14 @@ function Test() {
         setSkinTypeDesc(skin_type_desc);
         setSkinTypeImg(skin_type_img);
 
-        console.log("Results stored as:", skin_type, acne_prone, sun_sensitive, skin_type_desc,skin_type_img);
+        console.log(
+          "Results stored as:",
+          skin_type,
+          acne_prone,
+          sun_sensitive,
+          skin_type_desc,
+          skin_type_img
+        );
       })
       .catch((error) => {
         console.error("An error occurred:", error);
@@ -522,25 +560,41 @@ function Test() {
                   </h2>
                 </div>
 
-                <div className="flex w-full ring-1 ring-emerald-800 rounded-md p-2 my-8">
-                  <p className="basis-3/4">
+                <div className="flex flex-col md:flex-row items-center w-full ring-1 ring-emerald-800 rounded-md p-5 my-8">
+                  <p className="order-2 md:order-1">
                     {/* {skin_type_desc} */}
-                    Your skin type is <strong>Sensitive</strong>! It is more likely to react to external stimuli than normal skin. Your skin tends to be sensitive to heat, surfactants, and exfoliation, often resulting in irritation, redness, or swelling.
+                    Your skin type is <strong>Sensitive</strong>! It is more
+                    likely to react to external stimuli than normal skin. Your
+                    skin tends to be sensitive to heat, surfactants, and
+                    exfoliation, often resulting in irritation, redness, or
+                    swelling.
                   </p>
-                  <img src="skin_type_img" alt="" className="basis-1/4 border border-[#aaaaaa]"></img>
+                  <img
+                    src={sensitive} // change to skin_type_img on production
+                    alt=""
+                    className="order-1 flex-1 border border-[#aaaaaa] w-24 h-24 p-2 object-contain md:order-2"
+                  />
                 </div>
 
                 <div className="flex justify-center">
-                  <input type="hidden" value="scireessentials.com" id="websiteLink"></input>
-                  <button className="block rounded-2xl bg-emerald-600 my-0 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700"
-                          onClick={() => copyLinkToClipboard()}>
+                  <input
+                    type="hidden"
+                    value="scireessentials.com"
+                    id="websiteLink"
+                  ></input>
+                  <button
+                    className="block rounded-2xl bg-emerald-600 my-0 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700"
+                    onClick={() => copyLinkToClipboard()}
+                  >
                     Share the test!
                   </button>
                 </div>
 
                 <div className="flex justify-center">
-                  <button className="block rounded-2xl bg-emerald-600 my-5 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700"
-                          onClick={() => setShowFeaturedProducts(true)}>
+                  <button
+                    className="block rounded-2xl bg-emerald-600 my-5 px-12 py-1 text-center font-semibold text-white hover:bg-emerald-700"
+                    onClick={() => setShowFeaturedProducts(true)}
+                  >
                     I want to see featured products
                   </button>
                 </div>
