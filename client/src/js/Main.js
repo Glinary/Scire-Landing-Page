@@ -9,6 +9,12 @@ import Header from "./Header";
 import FeaturedProducts from "./FeaturedProducts";
 import axios from "axios";
 
+import sensitive from "./images/sensitive-min.jpg"
+import dry from "./images/dry-min.jpg"
+import combination from "./images/combination-min.jpg"
+import normal from "./images/normal-min.jpg"
+import oily from "./images/oily-min.jpg"
+
 // The main quiz section
 
 // list of all questions
@@ -195,6 +201,8 @@ function Test() {
   const [skinType, setSkinType] = useState(null);
   const [acneProne, setAcneProne] = useState(null);
   const [sunSensitive, setSunSensitive] = useState(null);
+  const [skin_type_desc, setSkinTypeDesc] = useState(null);
+  const [skin_type_img, setSkinTypeImg] = useState(null);
   const [guidelines, setGuidelines] = useState(true);
   const [showFeaturedProducts, setShowFeaturedProducts] = useState(false);
 
@@ -280,7 +288,7 @@ function Test() {
 
   // Process the answers and return the final result
   const processAnswers = async () => {
-    let skin_type, acne_prone, sun_sensitive;
+    let skin_type, acne_prone, sun_sensitive, skin_type_desc, skin_type_img;
 
     axios
       .get("/api/getAnswers", {
@@ -363,13 +371,32 @@ function Test() {
           sun_sensitive = "Not Sun Sensitive";
         }
 
-        storeResults(email, skin_type, acne_prone, sun_sensitive);
+        if(skin_type === "Sensitive") {
+          skin_type_desc = "Your skin type is <strong>Sensitive</strong>! It is more likely to react to external stimuli than normal skin. Your skin tends to be sensitive to heat, surfactants, and exfoliation, often resulting in irritation, redness, or swelling.";
+          skin_type_img = sensitive;
+        } else if(skin_type === "Dry") {
+          skin_type_desc = "Your skin type is <strong>Dry</strong>! It usually feels tight, rough, and irritable, with a tendency to look flaky or even scaly. Additionally, dry skin often appears dehydrated and has visibly small pores.";
+          skin_type_img = dry;
+        } else if(skin_type === "Combination") {
+          skin_type_desc = "Your skin type is <strong>Combination</strong>! It may be oily or normal around your nose, forehead, and chin (the T-Zone area of the face). Conversely, it could be dry or normal around your cheeks, mouth, and eyes (the U-Zone area of the face).";
+          skin_type_img = combination;
+        } else if(skin_type === "Normal") {
+          skin_type_desc = "Your skin type is <strong>Normal</strong>! It boasts a regular texture with no noticeable imperfections, maintaining a clean and soft appearance. Normal skin typically does not require special care, as it tends to stay balanced and resilient.";
+          skin_type_img = normal;
+        } else if(skin_type === "Oily") {
+          skin_type_desc = "Your skin type is <strong>Oily</strong>! It has a porous, humid and bright appearance. It tends to produce excess sebum and a susceptibility to acne and blackheads. Oily skin may require additional attention to manage oil production and maintain a matte finish throughout the day.";
+          skin_type_img = oily;
+        }
+
+        storeResults(email, skin_type, acne_prone, sun_sensitive, skin_type_desc);
 
         setSkinType(skin_type);
         setAcneProne(acne_prone);
         setSunSensitive(sun_sensitive);
+        setSkinTypeDesc(skin_type_desc);
+        setSkinTypeImg(skin_type_img);
 
-        console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
+        console.log("Results stored as:", skin_type, acne_prone, sun_sensitive, skin_type_desc,skin_type_img);
       })
       .catch((error) => {
         console.error("An error occurred:", error);
@@ -496,7 +523,11 @@ function Test() {
                 </div>
 
                 <div className="flex w-full ring-1 ring-emerald-800 rounded-md p-2 my-8">
-                  <p>Skin type desc lorem ipsum dolor</p>
+                  <p className="basis-3/4">
+                    {/* {skin_type_desc} */}
+                    Your skin type is <strong>Sensitive</strong>! It is more likely to react to external stimuli than normal skin. Your skin tends to be sensitive to heat, surfactants, and exfoliation, often resulting in irritation, redness, or swelling.
+                  </p>
+                  <img src="skin_type_img" alt="" className="basis-1/4 border border-[#aaaaaa]"></img>
                 </div>
 
                 <div className="flex justify-center">
