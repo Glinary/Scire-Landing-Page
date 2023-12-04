@@ -572,7 +572,7 @@ function Test() {
                   <img
                     src={sensitive} // change to skin_type_img on production
                     alt=""
-                    className="order-1 flex-1 border border-[#aaaaaa] w-24 h-24 p-2 object-contain md:order-2"
+                    className="order-1 m-4 w-40 h-40 flex-1 border border-[#aaaaaa] p-2 object-contain md:order-2 md:w-24 md:h-24"
                   />
                 </div>
 
