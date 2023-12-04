@@ -195,6 +195,7 @@ function Test() {
   const [skinType, setSkinType] = useState(null);
   const [acneProne, setAcneProne] = useState(null);
   const [sunSensitive, setSunSensitive] = useState(null);
+  const [skin_type_desc, setSkinTypeDesc] = useState(null);
   const [guidelines, setGuidelines] = useState(true);
   const [showFeaturedProducts, setShowFeaturedProducts] = useState(false);
 
@@ -280,7 +281,7 @@ function Test() {
 
   // Process the answers and return the final result
   const processAnswers = async () => {
-    let skin_type, acne_prone, sun_sensitive;
+    let skin_type, acne_prone, sun_sensitive, skin_type_desc;
 
     axios
       .get("/api/getAnswers", {
@@ -363,13 +364,26 @@ function Test() {
           sun_sensitive = "Not Sun Sensitive";
         }
 
-        storeResults(email, skin_type, acne_prone, sun_sensitive);
+        if(skin_type === "Sensitive") {
+          skin_type_desc = "Your skin type is Sensitive! It is more likely to react to external stimuli than normal skin. Your skin tends to be sensitive to heat, surfactants, and exfoliation, often resulting in irritation, redness, or swelling.";
+        } else if(skin_type === "Dry") {
+          skin_type_desc = "Your skin type is Dry! It usually feels tight, rough, and irritable, with a tendency to look flaky or even scaly. Additionally, dry skin often appears dehydrated and has visibly small pores.";
+        } else if(skin_type === "Combination") {
+          skin_type_desc = "Your skin type is Combination! It may be oily or normal around your nose, forehead, and chin (the T-Zone area of the face). Conversely, it could be dry or normal around your cheeks, mouth, and eyes (the U-Zone area of the face).";
+        } else if(skin_type === "Normal") {
+          skin_type_desc = "Your skin type is Normal! It boasts a regular texture with no noticeable imperfections, maintaining a clean and soft appearance. Normal skin typically does not require special care, as it tends to stay balanced and resilient.";
+        } else if(skin_type === "Oily") {
+          skin_type_desc = "Your skin type is Oily! It has a porous, humid and bright appearance. It tends to produce excess sebum and a susceptibility to acne and blackheads. Oily skin may require additional attention to manage oil production and maintain a matte finish throughout the day.";
+        }
+
+        storeResults(email, skin_type, acne_prone, sun_sensitive, skin_type_desc);
 
         setSkinType(skin_type);
         setAcneProne(acne_prone);
         setSunSensitive(sun_sensitive);
+        setSkinTypeDesc(skin_type_desc);
 
-        console.log("Results stored as:", skin_type, acne_prone, sun_sensitive);
+        console.log("Results stored as:", skin_type, acne_prone, sun_sensitive, skin_type_desc);
       })
       .catch((error) => {
         console.error("An error occurred:", error);
@@ -496,7 +510,9 @@ function Test() {
                 </div>
 
                 <div className="flex w-full ring-1 ring-emerald-800 rounded-md p-2 my-8">
-                  <p>Skin type desc lorem ipsum dolor</p>
+                  <p className="">
+                    {skin_type_desc}
+                  </p>
                 </div>
 
                 <div className="flex justify-center">
